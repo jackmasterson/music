@@ -1,0 +1,53 @@
+* {
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+	font-family: Open Sans;
+	text-align: center;
+	vertical-align: middle;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+	color: #ccc;
+}
+
+.main {
+	height: 80vh;
+	width: 100vw;
+	background: url(..//img/records.jpg) no-repeat;
+	background-size: cover;
+}
+
+.shade {
+	height: 80vh;
+	width: 100vw;
+	background-color: rgba(0,0,0,0.6);
+}
+
+.sub-header {
+	padding: 3vh 7vw 3vh 7vw;
+	color: white;
+}
+
+.search {
+	width: 350px;
+	height: 40px;
+	margin-top: 30vh;
+}
+
+.cutesy {
+	padding: 25px;
+}
+.cutesy-img-div {
+	width: 30vw;
+	float: left;
+}
+
+.cutesy-img {
+	height: 10vh;
+	width: 10vh;
+}
