@@ -39,6 +39,13 @@ a {
 	margin-top: 30vh;
 }
 
+.search-button {
+	width: 100px;
+	height: 35px;
+	font-size: 20px;
+	border-radius: 25px;
+}
+
 .cutesy {
 	padding: 25px;
 }
