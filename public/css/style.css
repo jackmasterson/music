@@ -154,4 +154,13 @@ a {
 	width: 75px;
 }
 
+.droppable {
+	height: 10px;
+}
+
+.highlight {
+	height: 30px;
+	background-color: gold;
+}
+
 

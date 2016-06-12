@@ -161,7 +161,20 @@ var toggle = {
         var infoId = document.getElementById((this.artist) + "-info");
         var ID = "#"+infoId
 
-        $( infoId ).draggable();
+        $( infoId ).draggable({
+          axis: "y",
+          containment: ".icons-div",
+          opacity: "0.3",
+          revert: "invalid",
+          scope: "favorites",
+          scroll: "true",
+          snap: "true"
+        });
+        $( ".droppable" ).droppable({
+          accept: infoId,
+          hoverClass: 'highlight',
+          scope: "favorites"
+        });
   //  dragIt.init();
 
   }

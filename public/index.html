@@ -42,8 +42,10 @@
 
       <div class="icons">
         <h4 class="icons-header">Ranked</h4>
+        
         <div class="icons-div" data-bind="foreach: model.musicInfo">
-           <ul class="icons-ul draggable" data-bind="attr: {id: infoId}, event: {mouseover: toggle.drag}">
+          <div class="droppable"></div>          
+           <ul class="icons-ul" data-bind="attr: {id: infoId}, event: {mouseover: toggle.drag}">
               <li class="icons-li">
                 <img class="icons-img" data-bind="attr: {src: artistImg}">
               </li>
@@ -54,6 +56,7 @@
                 </span>
               </li>
            </ul>
+           <div class="droppable"></div>
          </div>
       </div>
       <div data-bind="foreach: model.musicInfo">
