@@ -119,6 +119,15 @@ var musicView = {
     }
 };
 
+var toggle = {
+
+  add: function() {
+    console.log(this);
+    var thisID = document.getElementById(this.artist);
+    $(thisID).hide();
+  }
+};
+
 	(function() {
         /**
          * Obtains parameters from the hash of the URL
@@ -151,7 +160,7 @@ var musicView = {
               $('#loggedin').hide();
           }
         }
-      })();
+  })();
 
 
 ko.applyBindings(viewModel.init());

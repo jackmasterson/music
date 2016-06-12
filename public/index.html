@@ -27,29 +27,37 @@
               <input class="search type-val" type="text" placeholder="Is this an album, artist, or track?"></input>
               <br><button class="search-button">New Search</button>
             </div>
-          <div class="info" data-bind="foreach: model.musicInfo">
-            <ul> 
-              <li class="artist">
-                <span class="artist-name" data-bind="text: artist"></span>
-              </li>
-              <li class="genre">
-                <span>Genre: </span><span data-bind="text: genres[0]"></span>
-              </li>
-              <li>
-                <img class="artist-img" data-bind="attr: {src: artistImg}">
-              </li>
-
-              <li class="site">
-                <h3>
-                  Check them out on <a data-bind="attr: {href: spotSite}">Spotify</a>
-                  where they have <span data-bind="text: followers.total"></span> followers
-                </h3>
-              </li>
-              <li>
-                <a class="delete" href="#/">[delete]</a>
-              </li>
-            </ul>
-
+          <div class="check" data-bind="foreach: model.musicInfo">
+            <div data-bind="attr: {id: artist}">
+              <h4 class="artist-check" data-bind="text: artist"></h4>
+              <img class="img-check" data-bind="attr: {src: artistImg}">
+              <h4>
+                <a data-bind="click: toggle.add">Is this them? Click to add!</a>
+              </h4>
+            </div>
+          </div>
+          <div class="info">
+            <h1>My Favorite Artists</h1>
+            <div data-bind="foreach: model.musicInfo">
+              <ul class="info-ul"> 
+                <li class="artist">
+                  <h2 class="artist-name" data-bind="text: artist"></h2>
+                </li>
+                <li>
+                  <img class="artist-img" data-bind="attr: {src: artistImg}">
+                </li>
+                <br>
+                <li class="site">
+                  <h3>
+                    Check them out on <a data-bind="attr: {href: spotSite}">Spotify</a>
+                    where they have <span data-bind="text: followers.total"></span> followers
+                  </h3>
+                </li>
+                <li>
+                  <a class="delete" href="#/">[delete]</a>
+                </li>
+              </ul>
+            </div>
           </div>
           <div class="cutesy" data-bind="foreach: model.headImg">
             <div class="cutesy-img-div">
