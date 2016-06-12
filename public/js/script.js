@@ -17,7 +17,7 @@ var model = {
 			text: "Share"
 		}
 	],
-  musicInfo: []
+  musicInfo: ko.observableArray([])
 };
 
 var viewModel = {
@@ -42,6 +42,7 @@ var musicView = {
         "&type="+
         that.typeVal;
 
+      $('.info').slideDown();
       that.render();
     });
   },
@@ -109,7 +110,7 @@ var musicView = {
                 });
             }
 
-            console.log(model.musicInfo[0]);
+            console.log(model.musicInfo()[0]);
             $('#login').hide();
             $('#loggedin').show();
           }

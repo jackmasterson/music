@@ -26,8 +26,31 @@
               <input class="search item-val" type="text" placeholder="Search by Artist, Track, or Album"></input>              
               <input class="search type-val" type="text" placeholder="Is this an album, artist, or track?"></input>
               <br><button class="search-button">New Search</button>
-
             </div>
+          <div class="info" data-bind="foreach: model.musicInfo">
+            <ul> 
+              <li class="artist">
+                <span class="artist-name" data-bind="text: artist"></span>
+              </li>
+              <li class="genre">
+                <span>Genre: </span><span data-bind="text: genres[0]"></span>
+              </li>
+              <li>
+                <img class="artist-img" data-bind="attr: {src: artistImg}">
+              </li>
+
+              <li class="site">
+                <h3>
+                  Check them out on <a data-bind="attr: {href: spotSite}">Spotify</a>
+                  where they have <span data-bind="text: followers.total"></span> followers
+                </h3>
+              </li>
+              <li>
+                <a class="delete" href="#/">[delete]</a>
+              </li>
+            </ul>
+
+          </div>
           <div class="cutesy" data-bind="foreach: model.headImg">
             <div class="cutesy-img-div">
               <img class="cutesy-img" data-bind="attr: { src: src }">

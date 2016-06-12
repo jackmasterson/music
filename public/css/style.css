@@ -11,8 +11,18 @@
     padding: 0;
 }
 
+li {
+	display: inline;
+	margin: 20px;
+}
+
 h1 {
 	margin-top: 0;
+}
+
+a {
+	color: #aaa;
+	cursor: pointer;
 }
 
 #login, #loggedin {
@@ -27,8 +37,8 @@ h1 {
 	color: red;
 }
 
-a {
-	color: #aaa;
+.delete {
+	color: red;
 }
 
 .main {
@@ -74,6 +84,7 @@ a {
 .cutesy {
 	padding: 25px;
 }
+
 .cutesy-img-div {
 	width: 30vw;
 	float: left;
@@ -82,4 +93,18 @@ a {
 .cutesy-img {
 	height: 10vh;
 	width: 10vh;
+}
+
+.info {
+	height: 400px;
+	overflow-y: scroll;
+	display: none;
+	background-color: black;
+	color: white;
+}
+
+.artist-img {
+	height: 250px;
+	width: 325px;
+	padding-top: 20px;
 }
