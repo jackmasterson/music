@@ -1,3 +1,7 @@
+$(function() {
+    $( "#draggable" ).draggable();
+});
+
 var model = {
 	headImg: [
 		{
