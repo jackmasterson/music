@@ -28,14 +28,14 @@ a {
 }
 
 .main {
-	height: 80vh;
+	height: 70vh;
 	width: 100vw;
 	background: url(..//img/records.jpg) no-repeat;
 	background-size: cover;
 }
 
 .shade {
-	height: 80vh;
+	height: 70vh;
 	width: 100vw;
 	background-color: rgba(0,0,0,0.6);
 }
