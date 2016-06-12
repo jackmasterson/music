@@ -49,7 +49,7 @@ var musicView = {
       $.ajax({
           url: that.url,
           success: function(response) {
-            console.log(response);
+     //       console.log(response);
             /*-----search by artist--------*/
             
 
@@ -57,7 +57,7 @@ var musicView = {
             
            // console.log(spotSite);
            // console.log(response.artists.items[0].images[1]);
-            console.log(that.typeVal);
+       //     console.log(that.typeVal);
             var artistVal = that.typeVal === 'artist';
             var trackVal = that.typeVal === 'track';
             var albumVal = that.typeVal === 'album';
@@ -107,7 +107,7 @@ var musicView = {
                 });
             }
 
-            console.log(model.musicInfo()[0]);
+      //      console.log(model.musicInfo()[0]);
             $('#login').hide();
             $('#loggedin').show();
           }
@@ -123,7 +123,7 @@ var toggle = {
     var thisId = document.getElementById(this.artist);
     var thisIdAdd = document.getElementById((this.artist) + "-added");
     var infoId = document.getElementById((this.artist) + "-info");
-    console.log(thisIdAdd);
+  //  console.log(thisIdAdd);
     $(thisId).hide();
     $('.info').slideDown();
     $(thisIdAdd).show();
@@ -132,16 +132,28 @@ var toggle = {
   },
 
   delete: function(clicked) {
-    console.log(clicked);
-    console.log(this);
+ //   console.log(clicked);
+   // console.log(this);
     var thisIdAdd = document.getElementById((this.artist) + "-added");
     var infoId = document.getElementById((this.artist) + "-info");
     $(thisIdAdd).hide();
     $(infoId).hide();
 
+    var icons = document.getElementsByClassName('icons-div')[0];
+  //  console.log(icons)
+
     //need to refine; arrays will get huge;
     //possible solution is use autocomplete to have a "previous searches"
       //autofill
+  },
+
+  hide: function(clicked) {
+    console.log(clicked);
+
+  },
+
+  drag: function(clicked) {
+
   }
 };
 

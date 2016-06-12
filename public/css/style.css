@@ -140,14 +140,18 @@ a {
 .icons-ul {
 	display: none;
 	margin: 0;
+	text-align: left;
 }
 
 .icons-li {
 	margin-left: 3px;
 	margin-right: 3px;
+	cursor: pointer;
 }
 
 .icons-img {
 	height: 50px;
 	width: 75px;
 }
+
+
