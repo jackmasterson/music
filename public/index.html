@@ -37,7 +37,7 @@
             </div>
           </div>
           <div class="info">
-            <h1>My Favorite Artists</h1>
+            <h1 class="fav-header">My Favorite Artists</h1>
             <div data-bind="foreach: model.musicInfo">
               <ul data-bind="attr: {id: addedId}" class="info-ul"> 
                 <li class="artist">
@@ -54,7 +54,7 @@
                   </h3>
                 </li>
                 <li>
-                  <a class="delete" href="#/">[delete]</a>
+                  <a class="delete" data-bind="click: toggle.delete">[delete]</a>
                 </li>
               </ul>
             </div>

@@ -39,6 +39,7 @@ a {
 
 .delete {
 	color: red;
+	margin-bottom: 20px;
 }
 
 .main {
@@ -119,7 +120,12 @@ a {
 	opacity: 0.4;
 	filter: alpha(opacity=40);
 }
+
 .img-check {
 	height: 100px;
 	width: 175px;
+}
+
+.fav-header {
+	padding-top: 15px;
 }

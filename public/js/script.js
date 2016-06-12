@@ -130,6 +130,13 @@ var toggle = {
     $(thisId).hide();
     $('.info').slideDown();
     $(thisIdAdd).show();
+  },
+
+  delete: function(clicked) {
+    console.log(clicked);
+    console.log(this);
+    var thisIdAdd = document.getElementById((this.artist) + "-added");
+    $(thisIdAdd).hide();
   }
 };
 
