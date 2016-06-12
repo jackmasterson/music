@@ -7,72 +7,75 @@
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
   </head>
-
   <body>
-
-
-       
-              <div id="login">
-                <h1>Login with 
-                  <a target="_blank" href="https://www.spotify.com/us/">Spotify</a> 
-                  to Continue on to our website!
-                </h1>
-                <a href="/login" class="btn btn-primary">Log in</a>
-              </div>
-          <div class="main" id="loggedin">
-            <div class="shade">
-              <h1 class="header">Your Music. Your Way.</h1>
-              <h2 class="sub-header">Search the Spotify database and rank your favorite artists, albums, and tracks</h2>
-              <input class="search item-val" type="text" placeholder="Search by Artist, Track, or Album"></input>              
-              <input class="search type-val" type="text" placeholder="Is this an album, artist, or track?"></input>
-              <br><button class="search-button">New Search</button>
-            </div>
-          <div class="check" data-bind="foreach: model.musicInfo">
-            <div data-bind="attr: {id: artist}">
-              <h4 class="artist-check" data-bind="text: artist"></h4>
-              <img class="img-check" data-bind="attr: {src: artistImg}">
-              <h4>
-                <a data-bind="click: toggle.addClick">Is this them? Click to add!</a>
-              </h4>
-            </div>
-          </div>
-          <div class="info">
-            <h1 class="fav-header">My Favorite Artists</h1>
-            <div data-bind="foreach: model.musicInfo">
-              <ul data-bind="attr: {id: addedId}" class="info-ul"> 
-                <li class="artist">
-                  <h2 class="artist-name" data-bind="text: artist"></h2>
-                </li>
-                <li>
-                  <img class="artist-img" data-bind="attr: {src: artistImg}">
-                </li>
-                <br>
-                <li class="site">
-                  <h3>
-                    Check them out on <a data-bind="attr: {href: spotSite}">Spotify</a>
-                    where they have <span data-bind="text: followers.total"></span> followers
-                  </h3>
-                </li>
-                <li>
-                  <a class="delete" data-bind="click: toggle.delete">[delete]</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="cutesy" data-bind="foreach: model.headImg">
-            <div class="cutesy-img-div">
-              <img class="cutesy-img" data-bind="attr: { src: src }">
-              <h2 data-bind="text: text"></h2>
-            </div>
-          </div>
-
-
+    <div id="login">
+      <h1>Login with 
+        <a target="_blank" href="https://www.spotify.com/us/">Spotify</a> 
+        to Continue on to our website!
+      </h1>
+      <a href="/login" class="btn btn-primary">Log in</a>
+    </div>
+    <div class="main" id="loggedin">
+      <div class="shade">
+        <h1 class="header">Your Music. Your Way.</h1>
+        <h2 class="sub-header">Search the Spotify database and rank your favorite artists, albums, and tracks</h2>
+        <input class="search item-val" type="text" placeholder="Search by Artist, Track, or Album"></input>              
+        <input class="search type-val" type="text" placeholder="Is this an album, artist, or track?"></input>
+        <br><button class="search-button">New Search</button>
+      </div>
+    <div class="check" data-bind="foreach: model.musicInfo">
+      <div data-bind="attr: {id: artist}">
+        <h4 class="artist-check" data-bind="text: artist"></h4>
+        <img class="img-check" data-bind="attr: {src: artistImg}">
+        <h4>
+          <a data-bind="click: toggle.addClick">Is this them? Click to add!</a>
+        </h4>
+      </div>
+    </div>
+    <div class="info">
+      <h1 class="fav-header">My Favorite Artists</h1>
+      <div class="icons" data-bind="foreach: model.musicInfo">
+         <ul class="icons-ul" data-bind="attr: {id: infoId}">
+            <li class="icons-li">
+              <img class="icons-img" data-bind="attr: {src: artistImg}">
+            </li>
+            <li class="icons-li">
+              <span class="icons-header" data-bind="text: artist"></span>
+            </li>
+         </ul>
+      </div>
+      <div data-bind="foreach: model.musicInfo">
+        <ul data-bind="attr: {id: addedId}" class="info-ul"> 
+          <li class="artist">
+            <h2 class="artist-name" data-bind="text: artist"></h2>
+          </li>
+          <li>
+            <img class="artist-img" data-bind="attr: {src: artistImg}">
+          </li>
+          <br>
+          <li class="site">
+            <h3>
+              Check them out on <a data-bind="attr: {href: spotSite}">Spotify</a>
+              where they have <span data-bind="text: followers.total"></span> followers
+            </h3>
+          </li>
+          <li>
+            <a class="delete" data-bind="click: toggle.delete">[delete]</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="cutesy" data-bind="foreach: model.headImg">
+      <div class="cutesy-img-div">
+        <img class="cutesy-img" data-bind="attr: { src: src }">
+        <h2 data-bind="text: text"></h2>
+      </div>
+    </div>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
     <script src="js/lib/knockout-3.2.0.js"></script>
     <script src="js/lib/jquery.js"></script>
     <script src="js/script.js"></script>
-
   </body>
 </html>
 

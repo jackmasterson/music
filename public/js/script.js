@@ -13,8 +13,7 @@ var model = {
 			text: "Share"
 		}
 	],
-  musicInfo: ko.observableArray([]),
-  musicUse: ko.observableArray([])
+  musicInfo: ko.observableArray([])
 };
 
 var viewModel = {
@@ -77,7 +76,8 @@ var musicView = {
                 'spotSite': spotSite,
                 'followers': followers,
                 'genres': genres,
-                'addedId': artist+'-added'
+                'addedId': artist+'-added',
+                'infoId': artist+'-info'
               });
             }
 
@@ -122,10 +122,13 @@ var toggle = {
 
     var thisId = document.getElementById(this.artist);
     var thisIdAdd = document.getElementById((this.artist) + "-added");
+    var infoId = document.getElementById((this.artist) + "-info");
     console.log(thisIdAdd);
     $(thisId).hide();
     $('.info').slideDown();
     $(thisIdAdd).show();
+    $(infoId).show();
+
   },
 
   delete: function(clicked) {

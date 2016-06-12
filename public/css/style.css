@@ -129,3 +129,19 @@ a {
 .fav-header {
 	padding-top: 15px;
 }
+
+.icons {
+	position: fixed;
+	bottom: 5vh;
+	width: 250px;
+	opacity: 0.3;
+	filter: alpha(opacity=40);
+}
+.icons-ul {
+	display: none;
+}
+
+.icons-img {
+	height: 50px;
+	width: 75px;
+}
