@@ -64,11 +64,12 @@ var musicView = {
             console.log(that.typeVal);
             var artistVal = that.typeVal === 'artist';
             var trackVal = that.typeVal === 'track';
+            var albumVal = that.typeVal === 'album';
 
-            if(artistVal){
+            if(artistVal) {
               item = response.artists.items[0];
                   artist = item.name
-                  artistImg = item.images[1];
+                  artistImg = item.images[1].url;
                   spotSite = item.external_urls.spotify;
                   followers = item.followers;
                   genres = item.genres;
@@ -82,7 +83,7 @@ var musicView = {
               });
             }
 
-            if(trackVal){
+            if(trackVal) {
               item = response.tracks.items[0];
                 artist = item.artists[0].name;
                 spotSite = item.external_urls.spotify;
@@ -92,6 +93,19 @@ var musicView = {
                   'artist': artist,
                   'track': track,
                   'spotSite': spotSite
+                });
+            }
+
+            if(albumVal) {
+              item = response.albums.items[0];
+                album = item.name;
+                spotSite = item.external_urls.spotify;
+                albumImg = item.images[0].url;
+
+                model.musicInfo.push({
+                  'album': album,
+                  'spotSite': spotSite,
+                  'albumImg': albumImg
                 });
             }
 
