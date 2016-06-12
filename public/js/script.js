@@ -1,6 +1,4 @@
-$(function() {
-    $( "#draggable" ).draggable();
-});
+
 
 var model = {
 	headImg: [
@@ -17,7 +15,8 @@ var model = {
 			text: "Share"
 		}
 	],
-  musicInfo: ko.observableArray([])
+  musicInfo: ko.observableArray([]),
+  favoriteArtistInfo: ko.observableArray([])
 };
 
 var viewModel = {
@@ -132,6 +131,7 @@ var toggle = {
     $('.info').slideDown();
     $(thisIdAdd).show();
     $(infoId).show();
+    console.log(model.musicInfo());
 
   },
 
@@ -140,8 +140,29 @@ var toggle = {
    // console.log(this);
     var thisIdAdd = document.getElementById((this.artist) + "-added");
     var infoId = document.getElementById((this.artist) + "-info");
-    $(thisIdAdd).hide();
-    $(infoId).hide();
+   // $(thisIdAdd).hide();
+    //$(infoId).hide();
+    var len = model.musicInfo().length;
+    console.log(clicked);
+    for(var i=0; i<len; i++){
+      var artist = model.musicInfo()[i].artist
+      console.log(artist);
+      console.log(clicked.artist);
+      var matched = clicked.artist === artist;
+      if(matched){
+     //   console.log(this);
+        console.log(model.musicInfo());
+        model.musicInfo.splice(i, 1);
+        console.log(model.musicInfo());
+      }
+    }
+
+
+    
+  //  var matchingID = thisIdAdd
+  //  if(matchingID){
+    //  console.log(clicked)
+    //}
 
     var icons = document.getElementsByClassName('icons-div')[0];
   //  console.log(icons)
@@ -197,3 +218,4 @@ var toggle = {
 
 
 ko.applyBindings(viewModel.init());
+
