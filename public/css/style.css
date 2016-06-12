@@ -52,10 +52,13 @@ a {
 }
 
 .search-button {
-	width: 100px;
+	width: 300px;
 	height: 35px;
+	margin-top: 10px;
 	font-size: 20px;
-	border-radius: 25px;
+	border-radius: 5px;
+	color: white;
+	background-color: #0000ff;
 }
 
 .cutesy {

@@ -26,24 +26,21 @@ var viewModel = {
 	//	musicView.init();
 	}
 };
-
+ 
 var musicView = {
 
   init: function() {
-    console.log('hey');
     var that = this;
     var item = document.getElementsByClassName('item-val')[0];
     var type = document.getElementsByClassName('type-val')[0];
-    var itemVal, typeVal;
 
     $('.search-button').click(function(){
-      console.log('hoo');
-      itemVal = $(item).val();
-      typeVal = $(type).val();
+      that.itemVal = $(item).val();
+      that.typeVal = $(type).val();
       that.url = "https://api.spotify.com/v1/search?q="+
-        itemVal+
+        that.itemVal+
         "&type="+
-        typeVal;
+        that.typeVal;
 
       that.render();
     });
@@ -51,31 +48,54 @@ var musicView = {
 
     render: function() {
       var that = this;
-
+      var artist, artistImg, spotSite, followers, genres, item,
+        album, track;
       $.ajax({
           url: that.url,
           success: function(response) {
             console.log(response);
             /*-----search by artist--------*/
-            var item = response.artists.items[0];
-            var artist = item.name
-            var artistImg = item.images[1];
-            var spotSite = item.external_urls.spotify;
-            var followers = item.followers;
-            var genres = item.genres;
+            
+
             /*-----search by album--------*/
             
-            console.log(spotSite);
-            console.log(response.artists.items[0].images[1]);
-            model.musicInfo.push({
-              'artist': artist,
-              'artistImg': artistImg,
-              'spotSite': spotSite,
-              'followers': followers,
-              'genres': genres
-            });
+           // console.log(spotSite);
+           // console.log(response.artists.items[0].images[1]);
+            console.log(that.typeVal);
+            var artistVal = that.typeVal === 'artist';
+            var trackVal = that.typeVal === 'track';
 
-            console.log(model.musicInfo);
+            if(artistVal){
+              item = response.artists.items[0];
+                  artist = item.name
+                  artistImg = item.images[1];
+                  spotSite = item.external_urls.spotify;
+                  followers = item.followers;
+                  genres = item.genres;
+
+              model.musicInfo.push({
+                'artist': artist,
+                'artistImg': artistImg,
+                'spotSite': spotSite,
+                'followers': followers,
+                'genres': genres
+              });
+            }
+
+            if(trackVal){
+              item = response.tracks.items[0];
+                artist = item.artists[0].name;
+                spotSite = item.external_urls.spotify;
+                track = item.name;
+
+                model.musicInfo.push({
+                  'artist': artist,
+                  'track': track,
+                  'spotSite': spotSite
+                });
+            }
+
+            console.log(model.musicInfo[0]);
             $('#login').hide();
             $('#loggedin').show();
           }
