@@ -151,11 +151,6 @@ var toggle = {
     }
   },
 
-  hide: function(clicked) {
-    console.log(clicked);
-
-  },
-
   drag: function(clicked) {
         console.log(this);
         var infoId = document.getElementById((this.artist) + "-info");
@@ -170,9 +165,10 @@ var toggle = {
           scroll: "true",
           snap: "true"
         });
-        $( ".droppable" ).droppable({
+        $( ".will-drop" ).droppable({
           accept: infoId,
-          hoverClass: 'highlight',
+          addClasses: "droppable",
+          hoverClass: "highlight",
           scope: "favorites"
         });
   //  dragIt.init();
