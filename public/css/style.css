@@ -132,13 +132,19 @@ a {
 
 .icons {
 	position: fixed;
-	bottom: 5vh;
+	bottom: 15vh;
 	width: 250px;
 	opacity: 0.3;
 	filter: alpha(opacity=40);
 }
 .icons-ul {
 	display: none;
+	margin: 0;
+}
+
+.icons-li {
+	margin-left: 3px;
+	margin-right: 3px;
 }
 
 .icons-img {

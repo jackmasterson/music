@@ -135,7 +135,9 @@ var toggle = {
     console.log(clicked);
     console.log(this);
     var thisIdAdd = document.getElementById((this.artist) + "-added");
+    var infoId = document.getElementById((this.artist) + "-info");
     $(thisIdAdd).hide();
+    $(infoId).hide();
 
     //need to refine; arrays will get huge;
     //possible solution is use autocomplete to have a "previous searches"

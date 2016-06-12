@@ -34,15 +34,19 @@
     </div>
     <div class="info">
       <h1 class="fav-header">My Favorite Artists</h1>
-      <div class="icons" data-bind="foreach: model.musicInfo">
-         <ul class="icons-ul" data-bind="attr: {id: infoId}">
-            <li class="icons-li">
-              <img class="icons-img" data-bind="attr: {src: artistImg}">
-            </li>
-            <li class="icons-li">
-              <span class="icons-header" data-bind="text: artist"></span>
-            </li>
-         </ul>
+
+      <div class="icons">
+        <h4 class="icons-header">Ranked</h4>
+        <div data-bind="foreach: model.musicInfo">
+           <ul class="icons-ul" data-bind="attr: {id: infoId}">
+              <li class="icons-li">
+                <img class="icons-img" data-bind="attr: {src: artistImg}">
+              </li>
+              <li class="icons-li">
+                <span class="icons-header" data-bind="text: artist"></span>
+              </li>
+           </ul>
+         </div>
       </div>
       <div data-bind="foreach: model.musicInfo">
         <ul data-bind="attr: {id: addedId}" class="info-ul"> 
