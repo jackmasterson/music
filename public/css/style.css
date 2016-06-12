@@ -11,6 +11,10 @@
     padding: 0;
 }
 
+h1 {
+	margin-top: 0;
+}
+
 #login, #loggedin {
 	display: none;
 }
@@ -40,15 +44,21 @@ a {
 	background-color: rgba(0,0,0,0.6);
 }
 
-.sub-header {
-	padding: 3vh 7vw 3vh 7vw;
+.header {
+	padding: 10vh 7vw 0 7vw;
 	color: white;
+}
+
+.sub-header {
+	padding: 2vw 5vw 0 5vw;
+	color: white;
+	font-size: 20px;
 }
 
 .search {
 	width: 350px;
 	height: 40px;
-	margin-top: 30vh;
+	margin-top: 20vh;
 }
 
 .search-button {
