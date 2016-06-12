@@ -1,7 +1,3 @@
-//key = RCSWLKK118ZODUFE
-
-
-
 var model = {
 	headImg: [
 		{
