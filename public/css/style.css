@@ -25,9 +25,7 @@ a {
 	cursor: pointer;
 }
 
-#login, #loggedin {
-	display: none;
-}
+
 
 #login {
 	color: black
