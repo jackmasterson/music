@@ -11,8 +11,20 @@
     padding: 0;
 }
 
+#login, #loggedin {
+	display: none;
+}
+
+#login {
+	color: black
+}
+
+.exp {
+	color: red;
+}
+
 a {
-	color: #ccc;
+	color: #aaa;
 }
 
 .main {
