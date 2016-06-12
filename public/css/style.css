@@ -141,6 +141,7 @@ a {
 	display: none;
 	margin: 0;
 	text-align: left;
+	height: 50px;
 }
 
 .icons-li {
@@ -157,10 +158,9 @@ a {
 .droppable {
 	height: 10px;
 }
-
 .highlight {
-	height: 30px;
-	background-color: gold;
+	background-color: white;
+	height: 50px;
 }
 
 

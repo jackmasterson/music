@@ -44,19 +44,18 @@
         <h4 class="icons-header">Ranked</h4>
         
         <div class="icons-div" data-bind="foreach: model.musicInfo">
-          <div class="droppable"></div>          
-           <ul class="icons-ul" data-bind="attr: {id: infoId}, event: {mouseover: toggle.drag}">
-              <li class="icons-li">
-                <img class="icons-img" data-bind="attr: {src: artistImg}">
-              </li>
-              <li class="icons-li">
-                <span class="icons-header" data-bind="text: artist"></span>
-                <span>
-                  <a class="delete" data-bind="click: toggle.delete"> [X]</a>
-                </span>
-              </li>
-           </ul>
-           <div class="droppable"></div>
+            <div class="droppable">Drop Here!</div>      
+             <ul class="icons-ul" data-bind="attr: {id: infoId}, event: {mouseover: toggle.drag}">
+                <li class="icons-li">
+                  <img class="icons-img" data-bind="attr: {src: artistImg}">
+                </li>
+                <li class="icons-li">
+                  <span class="icons-header" data-bind="text: artist"></span>
+                  <span>
+                    <a class="delete" data-bind="click: toggle.delete"> [X]</a>
+                  </span>
+                </li>
+             </ul>
          </div>
       </div>
       <div data-bind="foreach: model.musicInfo">
