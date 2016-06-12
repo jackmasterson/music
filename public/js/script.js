@@ -23,6 +23,7 @@ var viewModel = {
 
 	init: function(){
 	//	musicView.init();
+   // dragIt.init();
 	}
 };
  
@@ -126,50 +127,28 @@ var toggle = {
     var thisId = document.getElementById(this.artist);
     var thisIdAdd = document.getElementById((this.artist) + "-added");
     var infoId = document.getElementById((this.artist) + "-info");
-  //  console.log(thisIdAdd);
+
     $(thisId).hide();
     $('.info').slideDown();
     $(thisIdAdd).show();
     $(infoId).show();
-    console.log(model.musicInfo());
 
   },
 
   delete: function(clicked) {
- //   console.log(clicked);
-   // console.log(this);
+    var artist, matched;
     var thisIdAdd = document.getElementById((this.artist) + "-added");
     var infoId = document.getElementById((this.artist) + "-info");
-   // $(thisIdAdd).hide();
-    //$(infoId).hide();
     var len = model.musicInfo().length;
     console.log(clicked);
     for(var i=0; i<len; i++){
-      var artist = model.musicInfo()[i].artist
-      console.log(artist);
-      console.log(clicked.artist);
-      var matched = clicked.artist === artist;
+      artist = model.musicInfo()[i].artist
+      matched = clicked.artist === artist;
+      
       if(matched){
-     //   console.log(this);
-        console.log(model.musicInfo());
         model.musicInfo.splice(i, 1);
-        console.log(model.musicInfo());
       }
     }
-
-
-    
-  //  var matchingID = thisIdAdd
-  //  if(matchingID){
-    //  console.log(clicked)
-    //}
-
-    var icons = document.getElementsByClassName('icons-div')[0];
-  //  console.log(icons)
-
-    //need to refine; arrays will get huge;
-    //possible solution is use autocomplete to have a "previous searches"
-      //autofill
   },
 
   hide: function(clicked) {
@@ -178,6 +157,20 @@ var toggle = {
   },
 
   drag: function(clicked) {
+        console.log(this);
+        var infoId = document.getElementById((this.artist) + "-info");
+        var ID = "#"+infoId
+
+        $( infoId ).draggable();
+  //  dragIt.init();
+
+  }
+};
+
+var dragIt = {
+  
+  init: function() {
+    console.log(this);
 
   }
 };
