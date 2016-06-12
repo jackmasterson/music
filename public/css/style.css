@@ -106,6 +106,7 @@ a {
 .info-ul {
 	border-bottom: 2px solid white;
 	padding-top: 12px;
+	display: none;
 }
 
 .artist-img {
