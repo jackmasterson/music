@@ -137,6 +137,10 @@ var toggle = {
     console.log(this);
     var thisIdAdd = document.getElementById((this.artist) + "-added");
     $(thisIdAdd).hide();
+
+    //need to refine; arrays will get huge;
+    //possible solution is use autocomplete to have a "previous searches"
+      //autofill
   }
 };
 
