@@ -16,6 +16,7 @@ var model = {
 		}
 	],
   musicInfo: ko.observableArray([]),
+  favoritesInfo: ko.observableArray([]),
   typeInfo: ko.observableArray([])
 };
 
@@ -62,7 +63,7 @@ var musicView = {
       $.ajax({
           url: that.url,
           success: function(response) {
-            console.log(response);
+         //   console.log(response);
 
             var artistVal = that.typeVal === 'artist';
             var trackVal = that.typeVal === 'track';
@@ -85,7 +86,8 @@ var musicView = {
                 'item': ko.observable(false),
                 'followers': followers,
                 'addedId': artist+'-added',
-                'infoId': artist+'-info'
+                'infoId': artist+'-info',
+                'stageId': artist+'-stage'
               });
             }
 
@@ -104,8 +106,9 @@ var musicView = {
                   'spotSite': spotSite,
                   'item': track,
                   'followers': ko.observable(false),
-                  'addedId': artist+'-added',
-                  'infoId': artist+'-info'
+                  'addedId': track+'-added',
+                  'infoId': track+'-info',
+                  'stageId': track+'-stage'
                 });
             }
 
@@ -118,13 +121,14 @@ var musicView = {
                 model.musicInfo.push({
                   'title': 'albumSearch',
                   'type': 'Album',
-                  'artist': album,
+                  'artist': ko.observable(false),
                   'itemImg': itemImg,
                   'spotSite': spotSite,
-                  'item': ko.observable(false),
+                  'item': album,
                   'followers': ko.observable(false),
                   'addedId': album+'-added',
-                  'infoId': album+'-info'
+                  'infoId': album+'-info',
+                  'stageId': album+'-stage'
                 });
             }
 
@@ -141,31 +145,24 @@ var musicView = {
 var toggle = {
 
   addClick: function(clicked) {
- //   console.log(this);
-    var thisId = document.getElementById(this.artist);
-    var thisIdAdd = document.getElementById((this.artist) + "-added");
-    var infoId = document.getElementById((this.artist) + "-info");
-    var title = document.getElementById(this.title);
-  //  console.log(title);
+      var infoId = document.getElementById((this.artist) + "-info");
+      var title = document.getElementById(this.title);
+   //   var titleClick = "'#"+this.title + "'";
+      var filterArtist = this.title === "artistSearch";
+      var filterAlbum = this.title === "albumSearch";
+      var filterTrack = this.title === "trackSearch";
 
-    var filterArtist = this.title === "artistSearch";
-    var filterAlbum = this.title === "albumSearch";
-    var filterTrack = this.title === "trackSearch";
+      model.favoritesInfo.push(clicked);
+      $('.info').show();
+      console.log(title);
+      console.log(this.title);
 
-    $(thisId).hide();
-    $('.info').slideDown();
-    $(thisIdAdd).show();
-
-
-    if((filterArtist) || (filterAlbum) || (filterTrack)) {
-  //    console.log(thisIdAdd, infoId);
-   //   $(title).prepend(thisIdAdd);
-      $(title).prepend(infoId);
-
-
-    }
-
-    $(title).show();
+      if((filterArtist) || (filterAlbum) || (filterTrack)) {
+        $(title).prepend(infoId);
+        
+      }
+   //   $(titleClick).trigger('click');
+     // $(title).show();
 
   },
 
@@ -183,6 +180,13 @@ var toggle = {
         model.musicInfo.splice(i, 1);
       }
     }
+  },
+
+  hideStage: function(clicked) {
+    console.log(this);
+    console.log(clicked);
+    var stageId = document.getElementById(this.stageId);
+    $(stageId).hide();
   },
 
   navShow: function(clicked) {
