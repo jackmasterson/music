@@ -49,8 +49,16 @@
 
       <div class="icons">
         <h4 class="icons-header">Ranked</h4>
+        <div class="fav-nav">
+          <ul class="fav-ul" data-bind="foreach: model.musicInfo">
+            <li class="fav-li">
+              <a href="#/" data-bind="click: toggle.navShow, text: type"></a>
+            </li>
+          </ul>
+        </div>
         
-        <div class="icons-div" data-bind="foreach: model.musicInfo">   
+        <div class="icons-div" data-bind="foreach: model.musicInfo"> 
+          <div class="icons-each" data-bind="attr: {id: title}">  
              <ul class="icons-ul" data-bind="attr: {id: infoId}, event: {mouseover: toggle.drag}">
                 <li class="icons-li">
                   <img class="icons-img" data-bind="attr: {src: itemImg}">
@@ -62,19 +70,17 @@
                   </span>
                 </li>
              </ul>
+           </div>
          </div>
+
       </div>
       <div data-bind="foreach: model.musicInfo">
         <ul data-bind="attr: {id: addedId}" class="info-ul"> 
-          <li class="artist">
-            <h2 class="artist-name" data-bind="if: artist">
-              <span data-bind="text: artist"></span>
-            </h2>
+          <li class="artist" data-bind="if: artist">
+            <h2 class="artist-name" data-bind="text: artist"></h2>
           </li>
-          <li class="track">
-            <h3 class="track-name" data-bind="if: item">
-              <span data-bind="text: item"></span>
-            </h3>
+          <li class="track" data-bind="if: item">
+            <h3 class="track-name" data-bind="text: item"></h3>
           </li>
           <li>
             <span data-bind="if: itemImg">

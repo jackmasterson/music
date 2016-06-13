@@ -67,7 +67,7 @@ var musicView = {
 
             if(artistVal) {
               item = response.artists.items[0];
-                  artist = item.name
+                  artist = item.name;
                   itemImg = item.images[1].url;
                   spotSite = item.external_urls.spotify;
                   followers = item.followers;
@@ -75,6 +75,7 @@ var musicView = {
 
               model.musicInfo.push({
                 'title': 'artistSearch',
+                'type': 'Artist',
                 'artist': artist,
                 'itemImg': itemImg,
                 'spotSite': spotSite,
@@ -94,6 +95,7 @@ var musicView = {
 
                 model.musicInfo.push({
                   'title': 'trackSearch',
+                  'type': 'Track',
                   'artist': artist,
                   'itemImg': ko.observable(false),//itemImg,
                   'spotSite': spotSite,
@@ -112,6 +114,7 @@ var musicView = {
 
                 model.musicInfo.push({
                   'title': 'albumSearch',
+                  'type': 'Album',
                   'artist': album,
                   'itemImg': itemImg,
                   'spotSite': spotSite,
@@ -134,15 +137,34 @@ var musicView = {
 var toggle = {
 
   addClick: function(clicked) {
-    console.log(this);
+ //   console.log(this);
     var thisId = document.getElementById(this.artist);
     var thisIdAdd = document.getElementById((this.artist) + "-added");
     var infoId = document.getElementById((this.artist) + "-info");
+    var title = document.getElementById(this.title);
+  //  console.log(title);
+
+    var filterArtist = this.title === "artistSearch";
+    
+  //  console.log(filterArtist, filterAlbum, filterTrack);
+    //console.log(thisIdAdd);
+
+    var filterAlbum = this.title === "albumSearch";
+    var filterTrack = this.title === "trackSearch";
 
     $(thisId).hide();
     $('.info').slideDown();
     $(thisIdAdd).show();
-    $(infoId).show();
+
+
+    if(filterArtist){
+  //    console.log(thisIdAdd, infoId);
+   //   $(title).prepend(thisIdAdd);
+      $(title).prepend(infoId);
+
+
+    }
+    $(title).show();
 
   },
 
@@ -162,8 +184,15 @@ var toggle = {
     }
   },
 
+  navShow: function(clicked) {
+  
+    var title = document.getElementById(this.title);
+    $('.icons-each').hide();
+    $(title).show();
+  },
+
   drag: function(clicked) {
-        console.log(this);
+     //   console.log(this);
         var infoId = document.getElementById((this.artist) + "-info");
         var ID = "#"+infoId
 
