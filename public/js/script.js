@@ -151,18 +151,19 @@ var musicView = {
 var toggle = {
 
   addClick: function(clicked) {
+      model.artistInfo.removeAll();
+      model.albumInfo.removeAll();
+      model.trackInfo.removeAll();
+
       var modelTitle, clickedTitle, matched;
       var title;
       var infoId = document.getElementById(title + "-info");
       var len = model.musicInfo().length;
 
-
-      console.log(title);
       model.favoritesInfo.push(clicked);
 
       model.favoritesInfo().forEach(function(fav){
-        console.log(fav);
-        console.log(fav.type);
+
         var type = fav.type;
         var artMatch = type === 'Artist';
         var albMatch = type === 'Album';
@@ -170,28 +171,24 @@ var toggle = {
         $('icons.each').hide();
 
         if(artMatch){
-          console.log(fav);
           model.artistInfo.push(fav);
           $("artistSearch").show();
 
         }
 
         if(albMatch){
-          console.log(fav);
           model.albumInfo.push(fav);
           $("albumSearch").show();
         }
 
         if(trackMatch){
-          console.log(fav);
           model.trackInfo.push(fav);
           $("trackSearch").show();
         }
+
+
       });
-
-
-
-
+      
       for(var i=0; i<len; i++){
         modelTitle = model.musicInfo()[i].title;
         clickedTitle = clicked.title;
@@ -203,7 +200,6 @@ var toggle = {
       }
 
       $(".info").show();
-    //  console.log(model.favoritesInfo());
   },
 
   deleteStage: function(clicked) {
