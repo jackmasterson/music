@@ -97,8 +97,6 @@ a {
 }
 
 .info {
-	height: 500px;
-	overflow-y: scroll;
 	display: none;
 	background-color: black;
 	color: white;
@@ -131,8 +129,9 @@ a {
 }
 
 .icons {
-	position: fixed;
-	bottom: 15vh;
+	position: absolute;
+	height: 250px;
+	overflow-y: scroll;
 	width: 250px;
 	opacity: 0.3;
 	filter: alpha(opacity=40);
@@ -150,13 +149,17 @@ a {
 	cursor: pointer;
 }
 
+.icons-header {
+	margin: 0;
+}
+
 .icons-img {
 	height: 50px;
 	width: 75px;
 }
 
 .droppable {
-	height: 50px;
+
 }
 
 .highlight {
