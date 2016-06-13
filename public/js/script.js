@@ -83,7 +83,8 @@ var musicView = {
                 'artist': artist,
                 'itemImg': itemImg,
                 'spotSite': spotSite,
-                'item': ko.observable(false),
+                'track': ko.observable(false),
+                'album': ko.observable(false),
                 'followers': followers,
                 'addedId': artist+'-added',
                 'infoId': artist+'-info',
@@ -104,7 +105,8 @@ var musicView = {
                   'artist': artist,
                   'itemImg': ko.observable(false),//itemImg,
                   'spotSite': spotSite,
-                  'item': track,
+                  'track': track,
+                  'album': ko.observable(false),
                   'followers': ko.observable(false),
                   'addedId': track+'-added',
                   'infoId': track+'-info',
@@ -124,7 +126,8 @@ var musicView = {
                   'artist': ko.observable(false),
                   'itemImg': itemImg,
                   'spotSite': spotSite,
-                  'item': album,
+                  'track': ko.observable(false),
+                  'album': album,
                   'followers': ko.observable(false),
                   'addedId': album+'-added',
                   'infoId': album+'-info',
@@ -147,50 +150,82 @@ var toggle = {
   addClick: function(clicked) {
       var infoId = document.getElementById((this.artist) + "-info");
       var title = document.getElementById(this.title);
-   //   var titleClick = "'#"+this.title + "'";
       var filterArtist = this.title === "artistSearch";
       var filterAlbum = this.title === "albumSearch";
       var filterTrack = this.title === "trackSearch";
+      var stageId = document.getElementById(this.stageId);
 
       model.favoritesInfo.push(clicked);
       $('.info').show();
-      console.log(title);
-      console.log(this.title);
 
       if((filterArtist) || (filterAlbum) || (filterTrack)) {
-        $(title).prepend(infoId);
-        
+        $(title).prepend(infoId); 
       }
-   //   $(titleClick).trigger('click');
-     // $(title).show();
 
+     // $(stageId).hide();
+      console.log(clicked);
+      console.log(model.musicInfo());
+      var modelTitle;
+      var clickedTitle;
+      var matched = modelTitle === clickedTitle;
+      var stageId = document.getElementById(this.stageId);
+      var len = model.musicInfo().length;
+      for(var i=0; i<len; i++){
+        modelTitle = model.musicInfo()[i].title;
+        clickedTitle = clicked.title;
+
+        if(matched){
+          model.musicInfo.splice(i, 1);
+        }
+      }
+  },
+
+  deleteStage: function(clicked) {
+    console.log(clicked);
+      var modelTitle;
+      var clickedTitle;
+      var matched = modelTitle === clickedTitle;
+      var stageId = document.getElementById(this.stageId);
+      var len = model.musicInfo().length;
+      for(var i=0; i<len; i++){
+        modelTitle = model.musicInfo()[i].title;
+        clickedTitle = clicked.title;
+
+        if(matched){
+          model.musicInfo.splice(i, 1);
+        }
+      }
   },
 
   delete: function(clicked) {
-    var artist, matched;
-    var thisIdAdd = document.getElementById((this.artist) + "-added");
-    var infoId = document.getElementById((this.artist) + "-info");
-    var len = model.musicInfo().length;
     console.log(clicked);
-    for(var i=0; i<len; i++){
-      artist = model.musicInfo()[i].artist
-      matched = clicked.artist === artist;
-      
-      if(matched){
-        model.musicInfo.splice(i, 1);
+      var modelTitle, clickedTitle, matched;
+
+      var stageId = document.getElementById(this.stageId);
+      var len = model.favoritesInfo().length;
+      for(var i=0; i<len; i++){
+        modelTitle = model.favoritesInfo()[i].infoId;
+        clickedTitle = clicked.infoId;
+        matched = modelTitle === clickedTitle;
+        if(matched){
+          model.favoritesInfo.splice(i, 1);
+        }
       }
-    }
   },
 
   hideStage: function(clicked) {
-    console.log(this);
-    console.log(clicked);
-    var stageId = document.getElementById(this.stageId);
-    $(stageId).hide();
+   // console.log(this);
+
+  //  $(stageId).hide();
   },
 
   navShow: function(clicked) {
     console.log(clicked);
+    var clickId = clicked.clickId;
+    var clickEl = document.getElementById(clickId);
+    console.log(clickEl);
+  //  console.log(clickId);
+  /*  console.log(clicked);
     var clickId = clicked.clickId;
     console.log(clickId);
     var clickEl = document.getElementById(clickId);
@@ -199,7 +234,7 @@ var toggle = {
    // var titleId = "#"+title;
     $('.icons-each').hide();
     $(clickEl).show();
-   // $(titleId).show();
+   // $(titleId).show();*/
   },
 
   drag: function(clicked) {

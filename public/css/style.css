@@ -105,6 +105,12 @@ a {
 .info-ul {
 	border-bottom: 2px solid white;
 	padding-top: 12px;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+.info-li {
+	margin: 0;
 }
 
 .artist-img {
@@ -113,7 +119,7 @@ a {
 	padding-top: 20px;
 }
 
-.check {
+.stage {
 	opacity: 0.4;
 	filter: alpha(opacity=40);
 }
@@ -141,10 +147,6 @@ a {
 	margin: 0;
 	text-align: left;
 	height: 50px;
-}
-
-.icons-each {
-	display: none;
 }
 
 .icons-li {
