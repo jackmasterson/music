@@ -148,12 +148,17 @@ var musicView = {
 var toggle = {
 
   addClick: function(clicked) {
-      var infoId = document.getElementById((this.artist) + "-info");
+      var infoId = document.getElementById((this.title) + "-info");
       var title = document.getElementById(this.title);
       var filterArtist = this.title === "artistSearch";
       var filterAlbum = this.title === "albumSearch";
       var filterTrack = this.title === "trackSearch";
       var stageId = document.getElementById(this.stageId);
+      var modelTitle;
+      var clickedTitle;
+      var matched = modelTitle === clickedTitle;
+      var stageId = document.getElementById(this.stageId);
+      var len = model.musicInfo().length;
 
       model.favoritesInfo.push(clicked);
       $('.info').show();
@@ -162,14 +167,6 @@ var toggle = {
         $(title).prepend(infoId); 
       }
 
-     // $(stageId).hide();
-      console.log(clicked);
-      console.log(model.musicInfo());
-      var modelTitle;
-      var clickedTitle;
-      var matched = modelTitle === clickedTitle;
-      var stageId = document.getElementById(this.stageId);
-      var len = model.musicInfo().length;
       for(var i=0; i<len; i++){
         modelTitle = model.musicInfo()[i].title;
         clickedTitle = clicked.title;
@@ -181,7 +178,6 @@ var toggle = {
   },
 
   deleteStage: function(clicked) {
-    console.log(clicked);
       var modelTitle;
       var clickedTitle;
       var matched = modelTitle === clickedTitle;
@@ -198,11 +194,10 @@ var toggle = {
   },
 
   delete: function(clicked) {
-    console.log(clicked);
       var modelTitle, clickedTitle, matched;
-
       var stageId = document.getElementById(this.stageId);
       var len = model.favoritesInfo().length;
+
       for(var i=0; i<len; i++){
         modelTitle = model.favoritesInfo()[i].infoId;
         clickedTitle = clicked.infoId;
@@ -213,14 +208,34 @@ var toggle = {
       }
   },
 
-  hideStage: function(clicked) {
-   // console.log(this);
-
-  //  $(stageId).hide();
-  },
-
   navShow: function(clicked) {
-    console.log(clicked);
+  //  console.log(clicked);
+    var clickedId = clicked.clickId;
+    var clickedEl = document.getElementById(clickedId);
+    console.log(clickedEl);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*  console.log(clicked);
     var clickId = clicked.clickId;
     var clickEl = document.getElementById(clickId);
     console.log(clickEl);
