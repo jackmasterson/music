@@ -15,7 +15,8 @@ var model = {
 			text: "Share"
 		}
 	],
-  musicInfo: ko.observableArray([])
+  musicInfo: ko.observableArray([]),
+  typeInfo: ko.observableArray([])
 };
 
 var viewModel = {
@@ -30,6 +31,13 @@ var musicView = {
 
   init: function() {
     var that = this;
+    model.typeInfo.push({'type': 'Artist',
+                         'clickId': 'artistSearch'},
+                        {'type': 'Album',
+                         'clickId': 'albumSearch'},
+                        {'type': 'Track',
+                         'clickId': 'trackSearch'});
+
     var item = document.getElementsByClassName('item-val')[0];
     var type = document.getElementsByClassName('type-val')[0];
 
@@ -49,18 +57,13 @@ var musicView = {
       var that = this;
       var artist, itemImg, spotSite, followers, genres, item,
         album, track;
+
+     // console.log(model.typeInfo());
       $.ajax({
           url: that.url,
           success: function(response) {
             console.log(response);
-            /*-----search by artist--------*/
-            
 
-            /*-----search by album--------*/
-            
-           // console.log(spotSite);
-           // console.log(response.artists.items[0].images[1]);
-       //     console.log(that.typeVal);
             var artistVal = that.typeVal === 'artist';
             var trackVal = that.typeVal === 'track';
             var albumVal = that.typeVal === 'album';
@@ -145,10 +148,6 @@ var toggle = {
   //  console.log(title);
 
     var filterArtist = this.title === "artistSearch";
-    
-  //  console.log(filterArtist, filterAlbum, filterTrack);
-    //console.log(thisIdAdd);
-
     var filterAlbum = this.title === "albumSearch";
     var filterTrack = this.title === "trackSearch";
 
@@ -185,10 +184,16 @@ var toggle = {
   },
 
   navShow: function(clicked) {
-  
-    var title = document.getElementById(this.title);
+    console.log(clicked);
+    var clickId = clicked.clickId;
+    console.log(clickId);
+    var clickEl = document.getElementById(clickId);
+  //  var title = document.getElementById(this.title);
+  //  console.log(model.musicInfo());
+   // var titleId = "#"+title;
     $('.icons-each').hide();
-    $(title).show();
+    $(clickEl).show();
+   // $(titleId).show();
   },
 
   drag: function(clicked) {
