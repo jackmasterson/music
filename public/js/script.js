@@ -15,8 +15,7 @@ var model = {
 			text: "Share"
 		}
 	],
-  musicInfo: ko.observableArray([]),
-  favoriteArtistInfo: ko.observableArray([])
+  musicInfo: ko.observableArray([])
 };
 
 var viewModel = {
@@ -48,12 +47,12 @@ var musicView = {
 
     render: function() {
       var that = this;
-      var artist, artistImg, spotSite, followers, genres, item,
+      var artist, itemImg, spotSite, followers, genres, item,
         album, track;
       $.ajax({
           url: that.url,
           success: function(response) {
-     //       console.log(response);
+            console.log(response);
             /*-----search by artist--------*/
             
 
@@ -69,17 +68,18 @@ var musicView = {
             if(artistVal) {
               item = response.artists.items[0];
                   artist = item.name
-                  artistImg = item.images[1].url;
+                  itemImg = item.images[1].url;
                   spotSite = item.external_urls.spotify;
                   followers = item.followers;
                   genres = item.genres;
 
               model.musicInfo.push({
+                'title': 'artistSearch',
                 'artist': artist,
-                'artistImg': artistImg,
+                'itemImg': itemImg,
                 'spotSite': spotSite,
+                'item': ko.observable(false),
                 'followers': followers,
-                'genres': genres,
                 'addedId': artist+'-added',
                 'infoId': artist+'-info'
               });
@@ -88,13 +88,19 @@ var musicView = {
             if(trackVal) {
               item = response.tracks.items[0];
                 artist = item.artists[0].name;
+                //itemImg = artist.images[1].url;
                 spotSite = item.external_urls.spotify;
                 track = item.name;
 
                 model.musicInfo.push({
+                  'title': 'trackSearch',
                   'artist': artist,
-                  'track': track,
-                  'spotSite': spotSite
+                  'itemImg': ko.observable(false),//itemImg,
+                  'spotSite': spotSite,
+                  'item': track,
+                  'followers': ko.observable(false),
+                  'addedId': artist+'-added',
+                  'infoId': artist+'-info'
                 });
             }
 
@@ -102,12 +108,17 @@ var musicView = {
               item = response.albums.items[0];
                 album = item.name;
                 spotSite = item.external_urls.spotify;
-                albumImg = item.images[0].url;
+                itemImg = item.images[0].url;
 
                 model.musicInfo.push({
-                  'album': album,
+                  'title': 'albumSearch',
+                  'artist': album,
+                  'itemImg': itemImg,
                   'spotSite': spotSite,
-                  'albumImg': albumImg
+                  'item': ko.observable(false),
+                  'followers': ko.observable(false),
+                  'addedId': album+'-added',
+                  'infoId': album+'-info'
                 });
             }
 
@@ -123,7 +134,7 @@ var musicView = {
 var toggle = {
 
   addClick: function(clicked) {
-
+    console.log(this);
     var thisId = document.getElementById(this.artist);
     var thisIdAdd = document.getElementById((this.artist) + "-added");
     var infoId = document.getElementById((this.artist) + "-info");
