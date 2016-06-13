@@ -148,16 +148,12 @@ var musicView = {
 var toggle = {
 
   addClick: function(clicked) {
-      var infoId = document.getElementById((this.title) + "-info");
+      var modelTitle, clickedTitle, matched;
       var title = document.getElementById(this.title);
-      var filterArtist = this.title === "artistSearch";
-      var filterAlbum = this.title === "albumSearch";
-      var filterTrack = this.title === "trackSearch";
-      var stageId = document.getElementById(this.stageId);
-      var modelTitle;
-      var clickedTitle;
-      var matched = modelTitle === clickedTitle;
-      var stageId = document.getElementById(this.stageId);
+      var infoId = document.getElementById(title + "-info");
+      var filterArtist = title === "artistSearch";
+      var filterAlbum = title === "albumSearch";
+      var filterTrack = title === "trackSearch";
       var len = model.musicInfo().length;
 
       model.favoritesInfo.push(clicked);
@@ -170,6 +166,7 @@ var toggle = {
       for(var i=0; i<len; i++){
         modelTitle = model.musicInfo()[i].title;
         clickedTitle = clicked.title;
+        matched = modelTitle === clickedTitle;
 
         if(matched){
           model.musicInfo.splice(i, 1);
@@ -178,14 +175,13 @@ var toggle = {
   },
 
   deleteStage: function(clicked) {
-      var modelTitle;
-      var clickedTitle;
-      var matched = modelTitle === clickedTitle;
-      var stageId = document.getElementById(this.stageId);
+      var modelTitle, clickedTitle, matched;
       var len = model.musicInfo().length;
+      
       for(var i=0; i<len; i++){
         modelTitle = model.musicInfo()[i].title;
         clickedTitle = clicked.title;
+        matched = modelTitle === clickedTitle;
 
         if(matched){
           model.musicInfo.splice(i, 1);
