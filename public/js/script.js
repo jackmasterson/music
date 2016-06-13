@@ -129,6 +129,7 @@ var musicView = {
             }
 
       //      console.log(model.musicInfo()[0]);
+            $('icons-each').hide();
             $('#login').hide();
             $('#loggedin').show();
           }
@@ -156,13 +157,14 @@ var toggle = {
     $(thisIdAdd).show();
 
 
-    if(filterArtist){
+    if((filterArtist) || (filterAlbum) || (filterTrack)) {
   //    console.log(thisIdAdd, infoId);
    //   $(title).prepend(thisIdAdd);
       $(title).prepend(infoId);
 
 
     }
+
     $(title).show();
 
   },

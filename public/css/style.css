@@ -131,6 +131,7 @@ a {
 	position: absolute;
 	height: 250px;
 	overflow-y: scroll;
+	overflow-x: scroll;
 	width: 350px;
 	opacity: 0.3;
 	filter: alpha(opacity=40);

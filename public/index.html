@@ -65,6 +65,12 @@
                 </li>
                 <li class="icons-li">
                   <span class="icons-header" data-bind="text: artist"></span>
+                  <span data-bind="if: item">: </span>
+                </li>
+                <li class="icons-li" data-bind="if: item">
+                  <span class="icons-header" data-bind="text: item"></span>
+                </li>
+                <li class="icons-li">
                   <span>
                     <a class="delete" data-bind="click: toggle.delete"> [X]</a>
                   </span>
