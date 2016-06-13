@@ -17,6 +17,9 @@ var model = {
 	],
   musicInfo: ko.observableArray([]),
   favoritesInfo: ko.observableArray([]),
+  artistInfo: ko.observableArray([]),
+  albumInfo: ko.observableArray([]),
+  trackInfo: ko.observableArray([]),
   typeInfo: ko.observableArray([])
 };
 
@@ -149,19 +152,45 @@ var toggle = {
 
   addClick: function(clicked) {
       var modelTitle, clickedTitle, matched;
-      var title = document.getElementById(this.title);
+      var title;
       var infoId = document.getElementById(title + "-info");
-      var filterArtist = title === "artistSearch";
-      var filterAlbum = title === "albumSearch";
-      var filterTrack = title === "trackSearch";
       var len = model.musicInfo().length;
 
-      model.favoritesInfo.push(clicked);
-      $('.info').show();
 
-      if((filterArtist) || (filterAlbum) || (filterTrack)) {
-        $(title).prepend(infoId); 
-      }
+      console.log(title);
+      model.favoritesInfo.push(clicked);
+
+      model.favoritesInfo().forEach(function(fav){
+        console.log(fav);
+        console.log(fav.type);
+        var type = fav.type;
+        var artMatch = type === 'Artist';
+        var albMatch = type === 'Album';
+        var trackMatch = type === 'Track';
+        $('icons.each').hide();
+
+        if(artMatch){
+          console.log(fav);
+          model.artistInfo.push(fav);
+          $("artistSearch").show();
+
+        }
+
+        if(albMatch){
+          console.log(fav);
+          model.albumInfo.push(fav);
+          $("albumSearch").show();
+        }
+
+        if(trackMatch){
+          console.log(fav);
+          model.trackInfo.push(fav);
+          $("trackSearch").show();
+        }
+      });
+
+
+
 
       for(var i=0; i<len; i++){
         modelTitle = model.musicInfo()[i].title;
@@ -172,6 +201,9 @@ var toggle = {
           model.musicInfo.splice(i, 1);
         }
       }
+
+      $(".info").show();
+    //  console.log(model.favoritesInfo());
   },
 
   deleteStage: function(clicked) {
@@ -207,9 +239,20 @@ var toggle = {
   navShow: function(clicked) {
   //  console.log(clicked);
     var clickedId = clicked.clickId;
-    var clickedEl = document.getElementById(clickedId);
+ //   console.log(clickedId);
+    var clickedEl = document.getElementsByClassName(clickedId);
     console.log(clickedEl);
+    var title = document.getElementsByClassName(this.title);
+  //  console.log(model.musicInfo());
+   // var titleId = "#"+title;
+    $('.icons-each').hide();
+    $(clickedEl).show();
+   // $(titleId).show();
+    console.log(model.favoritesInfo());
 
+    model.favoritesInfo().forEach(function(click){
+      console.log(click);
+    })
 
 
 

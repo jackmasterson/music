@@ -61,31 +61,49 @@
             </li>
           </ul>
         </div>
-        
-        <div class="icons-div" data-bind="foreach: model.favoritesInfo"> 
-          <div class="icons-each" data-bind="attr: {id: title}">  
-             <ul class="icons-ul" data-bind="attr: {id: infoId}, event: {mouseover: toggle.drag}">
-                <li class="icons-li" data-bind="if: itemImg">
-                  <img class="icons-img" data-bind="attr: {src: itemImg}">
-                </li>
-                <li class="icons-li" data-bind="if: artist">
-                  <span class="icons-header" data-bind="text: artist"></span>
-                  <span data-bind="if: track">: </span>
-                </li>
-                <li class="icons-li" data-bind="if: album">
-                  <span class="icons-header" data-bind="text: album"></span>
-                </li>
-                <li class="icons-li" data-bind="if: track">
-                  <span class="icons-header" data-bind="text: track"></span>
-                </li>
-                <li class="icons-li">
-                  <span>
-                    <a class="delete" data-bind="click: toggle.delete"> [X]</a>
-                  </span>
-                </li>
-             </ul>
-           </div>
-         </div>
+
+        <div class="icons-each artistSearch" data-bind="foreach: model.artistInfo">
+          <ul class="icons-ul">
+            <li class="icons-li" data-bind="itemImg">
+              <img class="icons-img" data-bind="attr: {src: itemImg}">
+            </li>
+            <li class="icons-li">
+              <span class="icons-header" data-bind="text: artist"></span>
+            </li>
+            <li class="icons-li">
+                <a class="delete" data-bind="click: toggle.delete"> [X]</a>
+            </li>
+          </ul>
+        </div>
+        <div class="icons-each albumSearch" data-bind="foreach: model.albumInfo">
+          <ul class="icons-ul">
+            <li class="icons-li" data-bind="itemImg">
+              <img class="icons-img" data-bind="attr: {src: itemImg}">
+            </li>
+            <li class="icons-li">
+              <span class="icons-header" data-bind="text: album"></span>
+            </li>
+            <li class="icons-li">
+              <a class="delete" data-bind="click: toggle.delete"> [X]</a>
+            </li>
+          </ul>
+        </div>
+        <div class="icons-each trackSearch" data-bind="foreach: model.trackInfo">
+          <ul class="icons-ul">
+            <li class="icons-li">
+              <span class="icons-header" data-bind="text: artist"></span>
+            </li>
+            <li class="icons-li">
+              <span class="icons-header" data-bind="text: track"></span>
+            </li>
+            <li class="icons-li">
+              <a class="delete" data-bind="click: toggle.delete"> [X]</a>
+            </li>
+          </ul>
+        </div>
+
+
+
 
       </div>
       <div data-bind="foreach: model.favoritesInfo">
