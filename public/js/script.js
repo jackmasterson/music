@@ -182,6 +182,8 @@ var toggle = {
           $("artistSearch").show();
           $(typeId).trigger('click');
 
+          //should include a color-change here
+
         }
 
         if(albMatch){
@@ -260,6 +262,16 @@ var toggle = {
  //     console.log(click);
     })
 
+  },
+
+  up: function(clicked) {
+    console.log('move dat up!');
+    console.log(clicked);
+  },
+
+  down: function(clicked) {
+    console.log('move dat doWNE');
+    console.log(clicked);
   },
 
   drag: function(clicked) {
