@@ -155,7 +155,8 @@ var toggle = {
       model.albumInfo.removeAll();
       model.trackInfo.removeAll();
 
-      var modelTitle, clickedTitle, matched;
+      var modelTitle, clickedTitle, matchedArt, matchedAlb, matchedTrack,
+        modelType, typeId;
       var title;
       var infoId = document.getElementById(title + "-info");
       var len = model.musicInfo().length;
@@ -163,6 +164,14 @@ var toggle = {
       model.favoritesInfo.push(clicked);
 
       model.favoritesInfo().forEach(function(fav){
+        var allEl = document.getElementsByClassName('fav-li');
+        $('.fav-li').children().css("color", "white");
+     /*   var allLen = allEl.length;
+        for(var t=0; t<len; t++){
+          console.log(allEl);
+          console.log(allEl[t]);
+          allEl[t].children().css("color", 'white');
+        }*/
 
         var type = fav.type;
         var artMatch = type === 'Artist';
@@ -171,25 +180,38 @@ var toggle = {
         $('icons.each').hide();
 
         if(artMatch){
+          var el = document.getElementById(fav.type);
+          el.style.color = 'red';
           model.artistInfo.push(fav);
+          typeId = "#"+fav.type;
           $("artistSearch").show();
+          $(typeId).trigger('click');
 
         }
 
         if(albMatch){
+          var el = document.getElementById(fav.type);
+          el.style.color = 'red';
           model.albumInfo.push(fav);
+          typeId = "#"+fav.type;
           $("albumSearch").show();
+          $(typeId).trigger('click');
         }
 
         if(trackMatch){
+          var el = document.getElementById(fav.type);
+          el.style.color = 'red';
           model.trackInfo.push(fav);
+          typeId = "#"+fav.type;
           $("trackSearch").show();
+          $(typeId).trigger('click');
         }
 
 
       });
-      
+
       for(var i=0; i<len; i++){
+
         modelTitle = model.musicInfo()[i].title;
         clickedTitle = clicked.title;
         matched = modelTitle === clickedTitle;
@@ -218,18 +240,11 @@ var toggle = {
   },
 
   delete: function(clicked) {
-      var modelTitle, clickedTitle, matched;
-      var stageId = document.getElementById(this.stageId);
-      var len = model.favoritesInfo().length;
 
-      for(var i=0; i<len; i++){
-        modelTitle = model.favoritesInfo()[i].infoId;
-        clickedTitle = clicked.infoId;
-        matched = modelTitle === clickedTitle;
-        if(matched){
-          model.favoritesInfo.splice(i, 1);
-        }
-      }
+  },
+
+  deleteIcon: function() {  
+
   },
 
   navShow: function(clicked) {
@@ -237,54 +252,19 @@ var toggle = {
     var clickedId = clicked.clickId;
  //   console.log(clickedId);
     var clickedEl = document.getElementsByClassName(clickedId);
-    console.log(clickedEl);
+  //  console.log(clickedEl);
     var title = document.getElementsByClassName(this.title);
   //  console.log(model.musicInfo());
    // var titleId = "#"+title;
     $('.icons-each').hide();
     $(clickedEl).show();
    // $(titleId).show();
-    console.log(model.favoritesInfo());
+  //  console.log(model.favoritesInfo());
 
     model.favoritesInfo().forEach(function(click){
-      console.log(click);
+ //     console.log(click);
     })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*  console.log(clicked);
-    var clickId = clicked.clickId;
-    var clickEl = document.getElementById(clickId);
-    console.log(clickEl);
-  //  console.log(clickId);
-  /*  console.log(clicked);
-    var clickId = clicked.clickId;
-    console.log(clickId);
-    var clickEl = document.getElementById(clickId);
-  //  var title = document.getElementById(this.title);
-  //  console.log(model.musicInfo());
-   // var titleId = "#"+title;
-    $('.icons-each').hide();
-    $(clickEl).show();
-   // $(titleId).show();*/
   },
 
   drag: function(clicked) {
