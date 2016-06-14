@@ -141,12 +141,15 @@ a {
 	width: 350px;
 	opacity: 0.3;
 	filter: alpha(opacity=40);
+	border: 2px solid white;
 }
 
 .icons-ul {
 	margin: 0;
 	text-align: left;
 	height: 50px;
+	margin-top: 25px;
+	margin-bottom: 25px;
 }
 
 .icons-li {
@@ -164,6 +167,9 @@ a {
 	width: 75px;
 }
 
+.up {
+	margin-right: 20px;
+}
 .droppable {
 
 }

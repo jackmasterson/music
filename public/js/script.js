@@ -166,12 +166,7 @@ var toggle = {
       model.favoritesInfo().forEach(function(fav){
         var allEl = document.getElementsByClassName('fav-li');
         $('.fav-li').children().css("color", "white");
-     /*   var allLen = allEl.length;
-        for(var t=0; t<len; t++){
-          console.log(allEl);
-          console.log(allEl[t]);
-          allEl[t].children().css("color", 'white');
-        }*/
+
 
         var type = fav.type;
         var artMatch = type === 'Artist';
