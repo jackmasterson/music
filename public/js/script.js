@@ -287,6 +287,9 @@ var toggle = {
 
   down: function(clicked) {
     var el = document.getElementById(clicked.artist);
+    var counter = ko.observable(count());
+    function count() {
+      var start, next;
     if(el.innerText === '') {
       start = -1;
       return start
@@ -296,6 +299,9 @@ var toggle = {
       next = parsed - 1;
       el.innerHTML = next;
     }
+  };
+
+  $(el).append(counter());
   },
 
   drag: function(clicked) {
