@@ -175,12 +175,16 @@ var toggle = {
         $('icons.each').hide();
 
         if(artMatch){
+          console.log(fav);
+
           var el = document.getElementById(fav.type);
           el.style.color = 'red';
           model.artistInfo.push(fav);
           typeId = "#"+fav.type;
           $("artistSearch").show();
           $(typeId).trigger('click');
+          var counter = 5;
+          $(el).append(counter);
 
           //should include a color-change here
 
@@ -266,7 +270,32 @@ var toggle = {
 
   up: function(clicked) {
     console.log('move dat up!');
-    console.log(clicked);
+ //   console.log(clicked);
+   // console.log(clicked.artist);
+    var el = document.getElementById(clicked.artist);
+    var counter = ko.observable(count());
+//    console.log(el);
+    function count() {
+     var start;
+     var next;
+      if(el.innerText === ''){
+        start = 1;
+        return start;
+      } 
+      else {
+      //  start = el.innerText;
+     //   console.log(start);
+     console.log(el.innerText);
+        var parsed = parseInt(el.innerText);
+
+        next = parsed + 1;
+
+        return next;
+
+      }
+   //   start = next++;
+    }
+    $(el).append(counter());
   },
 
   down: function(clicked) {

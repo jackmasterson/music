@@ -73,11 +73,13 @@
             <li class="icons-li">
                 <a class="delete" data-bind="click: toggle.delete"> [X]</a>
             </li>
+            <li class="thumbs">
+              <a class="up" data-bind="click: toggle.up">&#x1f44d;</a>
+              <a class="down" data-bind="click: toggle.down">&#x1f44e;</a>
+              <h3 data-bind="attr: {id: artist}"></h3>
+            </li>
           </ul>
-          <div class="thumbs">
-            <a class="up" data-bind="click: toggle.up">&#x1f44d;</a>
-            <a class="down" data-bind="click: toggle.down">&#x1f44e;</a>
-          </div>
+
         </div>
         <div class="icons-each albumSearch" data-bind="foreach: model.albumInfo">
           <ul class="icons-ul">
@@ -90,12 +92,12 @@
             <li class="icons-li">
               <a class="delete" data-bind="click: toggle.delete"> [X]</a>
             </li>
-
+            <li class="thumbs">
+              <a class="up" data-bind="click: toggle.up">&#x1f44d;</a>
+              <a class="down" data-bind="click: toggle.down">&#x1f44e;</a>
+            </li>
           </ul>
-                    <div class="thumbs">
-            <a class="up" data-bind="click: toggle.up">&#x1f44d;</a>
-            <a class="down" data-bind="click: toggle.down">&#x1f44e;</a>
-          </div>
+
         </div>
         <div class="icons-each trackSearch" data-bind="foreach: model.trackInfo">
           <ul class="icons-ul">
@@ -108,12 +110,11 @@
             <li class="icons-li">
               <a href="#/" class="delete" data-bind="click: toggle.delete"> [X]</a>
             </li>
-
+            <li class="thumbs">
+              <a class="up" data-bind="click: toggle.up">&#x1f44d;</a>
+              <a class="down" data-bind="click: toggle.down">&#x1f44e;</a>
+            </li>
           </ul>
-          <div class="thumbs">
-            <a class="up" data-bind="click: toggle.up">&#x1f44d;</a>
-            <a class="down" data-bind="click: toggle.down">&#x1f44e;</a>
-          </div>
         </div>
 
 

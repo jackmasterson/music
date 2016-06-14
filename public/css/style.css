@@ -148,8 +148,7 @@ a {
 	margin: 0;
 	text-align: left;
 	height: 50px;
-	margin-top: 25px;
-	margin-bottom: 25px;
+	margin-bottom: 30px;
 }
 
 .icons-li {
@@ -166,6 +165,7 @@ a {
 	height: 50px;
 	width: 75px;
 }
+
 
 .up {
 	margin-right: 20px;
