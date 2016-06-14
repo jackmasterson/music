@@ -290,7 +290,7 @@ var toggle = {
 
         next = parsed + 1;
 
-        return next;
+        el.innerHTML = next;
 
       }
    //   start = next++;
