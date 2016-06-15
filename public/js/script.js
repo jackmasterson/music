@@ -1,5 +1,5 @@
 
-
+var x = 0;
 var model = {
 	headImg: [
 		{
@@ -28,6 +28,7 @@ var viewModel = {
 	init: function(){
 	//	musicView.init();
    // dragIt.init();
+
 	}
 };
  
@@ -194,7 +195,6 @@ var toggle = {
 
           console.log(model.artistInfo());
           console.log(fav);
-          //should include a color-change here
 
         }
 
@@ -277,41 +277,16 @@ var toggle = {
   },
 
   up: function(clicked) {
-    var el = document.getElementById(clicked.artist);
-    var counter = ko.observable(count());
-    function count() {
-     var start;
-     var next;
-      if(el.innerText === ''){
-        start = 1;
-        return start;
-      } 
-      else {
-        var parsed = parseInt(el.innerText);
-        next = parsed + 1;
-        el.innerHTML = next;
-      }
-    };
-    $(el).append(counter());
+   var el = document.getElementById(clicked.artist);
+   var counter = ko.observable(++x);
+   $(el)[0].innerHTML = x;
+
   },
 
   down: function(clicked) {
     var el = document.getElementById(clicked.artist);
-    var counter = ko.observable(count());
-    function count() {
-      var start, next;
-    if(el.innerText === '') {
-      start = -1;
-      return start
-    }
-    else {
-      var parsed = parseInt(el.innerText);
-      next = parsed - 1;
-      el.innerHTML = next;
-    }
-  };
-
-  $(el).append(counter());
+    var counter = ko.observable(--x);
+    $(el)[0].innerHTML = x;
   },
 
   drag: function(clicked) {
