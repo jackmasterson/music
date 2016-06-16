@@ -217,23 +217,25 @@ var toggle = {
       console.log(ade);
      // console.log(ade);
       console.log(ade[0]);
-
+      console.log(ade[0].innerHTML);
 
    // function add() {
-   // ade[0].innerHTML = ++x;
-      function filter() { 
-       return function() {
-          console.log(++x);
-       }
-     }
+   // ade[0].innerHTML = ++x; 
+     //   console.log(++x);
+      //  ++x;
+      function filter(){
+          x = ade[0].innerHTML;
+          return ++x;
+          
+       
+     };
+   //  filter();
+     ade[0].innerHTML = filter();
+
+   },
     
        
 
-
-   var maybe = filter();
-   var tryAgain = filter();
-   console.log(maybe);
-   console.log(tryAgain);
 
    
 
@@ -251,7 +253,7 @@ var toggle = {
         ++x;
     };*/
 
-  },
+
 
   down: function(clicked) {
     var el = document.getElementById(clicked.artist);
