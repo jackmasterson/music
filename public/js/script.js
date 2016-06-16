@@ -68,140 +68,52 @@ var musicView = {
       $.ajax({
           url: that.url,
           success: function(response) {
-     //       console.log(response);
-
-        /*          item = response.artists.items[0];
-                  type = item.type;
-                  artist = item.name;
-                  itemImg = item.images[1].url;
-                  spotSite = item.external_urls.spotify;
-                  followers = item.followers;
-                  genres = item.genres;*/
-
-          //  model.exp.push(response);
-       //     console.log(model.exp());
-           //   model.musicInfo.push(response);
-         //   model.musicInfo.removeAll();
-           /* var artistVal = that.typeVal === 'artist';
-            var trackVal = that.typeVal === 'track';
-            var albumVal = that.typeVal === 'album';*/
+            console.log(response);
             model.exp.push(response);
             var exp = model.exp();
-          //  if(artistVal) {
-              var item;
-              var itemLen, typed, len;
-                var len = model.exp().length;
-                var inf = model.musicInfo();
-         //     console.log(len);
-           //   console.log(response);
+            var itemLen, typed, len, item;
+            var len = model.exp().length;
+            var inf = model.musicInfo();
 
               for(var t=0; t<len; t++){
-             //   console.log(response[t]);
                  typed = Object.getOwnPropertyNames(exp[t])[0];
                  console.log(typed);
                 if(typed === 'artists'){
-              //    console.log(inf, 'artist');
                   item = response.artists.items;
                 }
+
                 if(typed === 'tracks'){
                   item = response.tracks.items;
                 }
+
                 if(typed === 'albums'){
                   item = response.albums.items;
                 }
+
               }
               model.exp.removeAll();
-          //    console.log(item);
-          //    console.log(inf.length);
-       //   console.log(model.musicInfo());
-
-              if(item.length>5){
-                itemLen = 5;
-              }
-              else {
-                itemLen = item.length;
-              }
+              
+              itemLen = item.length;
+              
               model.musicInfo.removeAll();
 
               for(var i=0; i<itemLen; i++){
                 
                 var name = item[i].name;
-               // console.log(item[i].images[1]);
-               var itemImg = ko.observable(false);
-               if(item[i].images !== undefined){
-                  itemImg = item[i].images[1].url;
-               }
-                
-                model.musicInfo.push({name: name, 'itemImg': itemImg});
+                var itemImg = ko.observable(false);
+                var artist = ko.observable(false);
+                if(item[i].images !== undefined){
+                    itemImg = item[i].images[1].url;
+                }
+                if(item[i].artists !== undefined){
+                    artist = item[i].artists[0].name;
+                    console.log(artist);
+                }
+                  
+                 model.musicInfo.push({name: name, 'itemImg': itemImg, 'artist': artist});
               }
 
-         /*         artist = item.name;
-                  itemImg = item.images[1].url;
-                  spotSite = item.external_urls.spotify;
-                  followers = item.followers;
-                  genres = item.genres;
-
-              model.musicInfo.push({
-                'title': 'artistSearch',
-                'type': 'Artist',
-                'artist': artist,
-                'itemImg': itemImg,
-                'spotSite': spotSite,
-                'track': ko.observable(false),
-                'album': ko.observable(false),
-                'followers': followers,
-                'addedId': artist+'-added',
-                'infoId': artist+'-info',
-                'stageId': artist+'-stage'
-              });
-          //  }
-          */
-/*
-            if(trackVal) {
-              item = response.tracks.items[0];
-                artist = item.artists[0].name;
-                //itemImg = artist.images[1].url;
-                spotSite = item.external_urls.spotify;
-                track = item.name;
-
-                model.musicInfo.push({
-                  'title': 'trackSearch',
-                  'type': 'Track',
-                  'artist': artist,
-                  'itemImg': ko.observable(false),//itemImg,
-                  'spotSite': spotSite,
-                  'track': track,
-                  'album': ko.observable(false),
-                  'followers': ko.observable(false),
-                  'addedId': track+'-added',
-                  'infoId': track+'-info',
-                  'stageId': track+'-stage'
-                });
-            }
-
-            if(albumVal) {
-              item = response.albums.items[0];
-                album = item.name;
-                spotSite = item.external_urls.spotify;
-                itemImg = item.images[0].url;
-
-                model.musicInfo.push({
-                  'title': 'albumSearch',
-                  'type': 'Album',
-                  'artist': ko.observable(false),
-                  'itemImg': itemImg,
-                  'spotSite': spotSite,
-                  'track': ko.observable(false),
-                  'album': album,
-                  'followers': ko.observable(false),
-                  'addedId': album+'-added',
-                  'infoId': album+'-info',
-                  'stageId': album+'-stage'
-                });
-            }
-            */
-
-      //      console.log(model.musicInfo()[0]);
+         
             $('icons-each').hide();
             $('#login').hide();
             $('#loggedin').show();
@@ -213,6 +125,12 @@ var musicView = {
 
 var typed;
 var toggle = {
+
+  init: function(){
+    $('.cutesy').slideUp(function(){
+      $('.stage').slideDown();
+    });
+  },
 
   addClick: function(clicked){
  //   console.log(clicked);

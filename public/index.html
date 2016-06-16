@@ -22,29 +22,9 @@
         <h2 class="sub-header">Search the Spotify database and rank your favorite artists, albums, and tracks</h2>
         <input class="search item-val" type="text" placeholder="Search by Artist, Track, or Album"></input>              
         <input class="search type-val" type="text" placeholder="Is this an album, artist, or track?"></input>
-        <br><button class="search-button">New Search</button>
+        <br><button class="search-button" data-bind="click: toggle.init">New Search</button>
       </div>
-    
-    <div class="stage" data-bind="foreach: model.expStage">
-        <h4 class="artist-check" data-bind="if: artist">
-          <span data-bind="text: artist"></span>
-        </h4>
-        <h3 class="track-check" data-bind="if: track">
-          <span data-bind="text: track"></span>
-        </h3>
-        <h3 class="track-check" data-bind="if: album">
-          <span data-bind="text: album"></span>
-        </h3>
-        <span data-bind="if: itemImg">
-          <img class="img-check" data-bind="attr: {src: itemImg}">
-        </span>
-        <h4>
-          <a data-bind="click: toggle.addClick">Is this it? Click to add!</a>
-        </h4>
-        <h1>
-          <a data-bind="click: toggle.deleteStage">[X]</a>
-        </h1>
-    </div>
+  
 
 
     <div class="stage" data-bind="foreach: model.musicInfo">
@@ -53,6 +33,9 @@
       <ul class="stage-ul">
         <li class="stage-li track-check">
           <span data-bind="text: name"></span>
+        </li>
+        <li class="stage-li track-check" data-bind="if: artist">
+          <span data-bind="text: artist"></span>
         </li>
         <li class="stage-li" data-bind="if: itemImg">
           <img class="img-check" data-bind="attr: {src: itemImg}">
