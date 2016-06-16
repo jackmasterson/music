@@ -201,6 +201,11 @@ var toggle = {
         model.expInfo.splice(index, 1);
       }
     })
+    console.log(model.expInfo()[0]);
+    if(model.expInfo()[0] === undefined){
+      $('.info').hide();
+      $('.cutesy').show();
+    }
   },
 
   navShow: function(clicked) {
