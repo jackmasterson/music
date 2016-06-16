@@ -146,36 +146,23 @@ var musicView = {
     addClick: function(clicked){
       
       model.expInfo.push(clicked);
-      console.log(model.expInfo());
+      
       model.expInfo().forEach(function(info){
-        console.log(info);
+
         var type = info.type;
         var typeId = "#"+type;
         var typeClass= "."+type;
-        console.log(type);
-        console.log(typeId);
-        var el = document.getElementById(type);
-        console.log(el);
+       
         $(typeId).click(function(){
           $('.iconsUl').hide();
           $(typeClass).show();
         });
+        $(typeId).trigger("click");
 
       });
-    //  console.log('BREAK');
+
       $(".stage").hide();
       $(".info").show();
-   //   $()
-     /* $('#Artist').click(function(){
-        $('.artist').show();
-        $('.album').hide();
-        $('.track').hide();
-      });
-      $('#Track').click(function(){
-        $('.track').show();
-        $('.artist').hide();
-        $('.album').hide();
-      })*/
 
     }
 };
