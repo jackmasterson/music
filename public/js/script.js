@@ -1,5 +1,5 @@
 
-var x = 0;
+
 var model = {
 	headImg: [
 		{
@@ -16,13 +16,8 @@ var model = {
 		}
 	],
   musicInfo: ko.observableArray([]),
-  favoritesInfo: ko.observableArray([]),
-  artistInfo: ko.observableArray([]),
-  albumInfo: ko.observableArray([]),
-  trackInfo: ko.observableArray([]),
   typeInfo: ko.observableArray([]),
   exp: ko.observableArray(),
-  expStage: ko.observableArray(),
   expInfo: ko.observableArray()
 };
 
@@ -168,7 +163,7 @@ var musicView = {
 
     }
 };
-
+var x = 0;
 var toggle = {
 
   init: function(){
@@ -178,18 +173,8 @@ var toggle = {
   },
 
   deleteStage: function(clicked) {
-      var modelTitle, clickedTitle, matched;
-      var len = model.musicInfo().length;
-      
-      for(var i=0; i<len; i++){
-        modelTitle = model.musicInfo()[i].title;
-        clickedTitle = clicked.title;
-        matched = modelTitle === clickedTitle;
-
-        if(matched){
-          model.musicInfo.splice(i, 1);
-        }
-      }
+    $('.stage').hide();
+    $('.cutesy').show();
   },
 
   delete: function(clicked) {
@@ -212,14 +197,59 @@ var toggle = {
     var clickedId = clicked.clickId;
     var clickedEl = document.getElementsByClassName(clickedId);
     var title = document.getElementsByClassName(this.title);
-  //  $('.icons-each').hide();
-  //  $(clickedEl).show();
 
   },
 
   up: function(clicked) {
-   var el = document.getElementById(clicked.artist);
-   $(el)[0].innerHTML = ++x;
+ //   console.log(clicked);
+  // var el = document.getElementById(clicked.artist);
+   //$(el)[0].innerHTML = ++x;
+
+    var clickedId, children, ade;
+  //  console.log(clickedId);
+    var classed = document.getElementsByClassName('thumbs');
+   // console.log($(clickedId).children(classed));
+      clickedId = document.getElementById(clicked.name);
+      console.log(clickedId);
+      children = $(clickedId).children();
+      console.log(children);
+      ade = $(children).children('h3');
+      console.log(ade);
+     // console.log(ade);
+      console.log(ade[0]);
+
+
+   // function add() {
+   // ade[0].innerHTML = ++x;
+      function filter() { 
+       return function() {
+          console.log(++x);
+       }
+     }
+    
+       
+
+
+   var maybe = filter();
+   var tryAgain = filter();
+   console.log(maybe);
+   console.log(tryAgain);
+
+   
+
+    //};
+    //var clickedId = add();
+  //  console.log(children);
+    //console.log(clicked.)
+    /*var counter = document.getElementsByClassName('counter');
+      if($(clickedId).counter){
+        
+        console.log(counter);
+       
+        counter.innerHTML = x;
+
+        ++x;
+    };*/
 
   },
 

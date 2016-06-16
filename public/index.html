@@ -27,7 +27,9 @@
   
 
 
-    <div class="stage" data-bind="foreach: model.musicInfo">
+    <div class="stage">
+      <a data-bind="click: toggle.deleteStage">[X]</a>
+      <div data-bind="foreach: model.musicInfo">
       <ul class="stage-ul">
         <li class="stage-li track-check">
           <span data-bind="text: name"></span>
@@ -40,9 +42,9 @@
         </li>
         <li class="stage-li">
           <a data-bind="click: musicView.addClick">[Add]</a>
-          <a data-bind="click: toggle.deleteStage">[X]</a>
         </i>
       </ul>
+    </div>
     </div>
 
 
@@ -60,7 +62,7 @@
         </div>
 
         <div class="icons-each" data-bind="foreach: model.expInfo">
-          <ul class="icons-ul" data-bind="attr: {'class': type}, css: {iconsUl: type}">
+          <ul class="icons-ul" data-bind="attr: {'class': type, id: name}, css: {iconsUl: type}">
             <li class="icons-li" data-bind="if: itemImg">
               <img class="icons-img" data-bind="attr: {src: itemImg}">
             </li>
@@ -76,7 +78,7 @@
             <li class="thumbs">
               <a class="up" data-bind="click: toggle.up">&#x1f44d;</a>
               <a class="down" data-bind="click: toggle.down">&#x1f44e;</a>
-              <h3 data-bind="attr: {id: artist}"></h3>
+              <h3 class="counter"></h3>
             </li>
           </ul>
         </div>
