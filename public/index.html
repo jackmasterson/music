@@ -60,7 +60,7 @@
         </div>
 
         <div class="icons-each" data-bind="foreach: model.expInfo">
-          <ul class="icons-ul">
+          <ul class="icons-ul" data-bind="attr: {'class': type}, css: {iconsUl: type}">
             <li class="icons-li" data-bind="if: itemImg">
               <img class="icons-img" data-bind="attr: {src: itemImg}">
             </li>

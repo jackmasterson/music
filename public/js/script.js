@@ -38,11 +38,11 @@ var musicView = {
 
   init: function() {
     var that = this;
-    model.typeInfo.push({'type': 'Artist',
+    model.typeInfo.push({'type': 'artist',
                          'clickId': 'artistSearch'},
-                        {'type': 'Album',
+                        {'type': 'album',
                          'clickId': 'albumSearch'},
-                        {'type': 'Track',
+                        {'type': 'track',
                          'clickId': 'trackSearch'});
 
     var item = document.getElementsByClassName('item-val')[0];
@@ -103,7 +103,7 @@ var musicView = {
 
                 var name = item[i].name;
                 var type = item[i].type;
-                console.log(type);
+          //      console.log(type);
                 var spotSite = item[i].external_urls.spotify;
          
                 var followers = ko.observable(false);
@@ -136,7 +136,7 @@ var musicView = {
               }
 
          
-            $('icons-each').hide();
+         //   $('icons-each').hide();
             $('#login').hide();
             $('#loggedin').show();
           }
@@ -144,10 +144,38 @@ var musicView = {
     },
 
     addClick: function(clicked){
-     
+      
       model.expInfo.push(clicked);
+      console.log(model.expInfo());
+      model.expInfo().forEach(function(info){
+        console.log(info);
+        var type = info.type;
+        var typeId = "#"+type;
+        var typeClass= "."+type;
+        console.log(type);
+        console.log(typeId);
+        var el = document.getElementById(type);
+        console.log(el);
+        $(typeId).click(function(){
+          $('.iconsUl').hide();
+          $(typeClass).show();
+        });
+
+      });
+    //  console.log('BREAK');
       $(".stage").hide();
       $(".info").show();
+   //   $()
+     /* $('#Artist').click(function(){
+        $('.artist').show();
+        $('.album').hide();
+        $('.track').hide();
+      });
+      $('#Track').click(function(){
+        $('.track').show();
+        $('.artist').hide();
+        $('.album').hide();
+      })*/
 
     }
 };
@@ -176,31 +204,22 @@ var toggle = {
   },
 
   delete: function(clicked) {
-    console.log(clicked);
     var index;
-    var expInfo = model.expInfo();
-    console.log(expInfo);
     model.expInfo().forEach(function(info){
-      console.log(info)
-      if((clicked.name === info.name) && (clicked.type === info.type)) {
-        console.log(expInfo);
-        index = expInfo.indexOf(info);
-        model.expInfo.splice(index);
-        console.log(model.expInfo());
+
+      if(clicked === info) {
+        index = model.expInfo().indexOf(info);
+        model.expInfo.splice(index, 1);
       }
     })
-  },
-
-  deleteIcon: function() {  
-
   },
 
   navShow: function(clicked) {
     var clickedId = clicked.clickId;
     var clickedEl = document.getElementsByClassName(clickedId);
     var title = document.getElementsByClassName(this.title);
-    $('.icons-each').hide();
-    $(clickedEl).show();
+  //  $('.icons-each').hide();
+  //  $(clickedEl).show();
 
   },
 
