@@ -28,8 +28,6 @@
 
 
     <div class="stage" data-bind="foreach: model.musicInfo">
-
-      
       <ul class="stage-ul">
         <li class="stage-li track-check">
           <span data-bind="text: name"></span>
@@ -41,14 +39,13 @@
           <img class="img-check" data-bind="attr: {src: itemImg}">
         </li>
         <li class="stage-li">
-          <a data-bind="click: toggle.addClick">Is this it? Click to add!</a>
-        </i>
-        <li class="stage-li">
+          <a data-bind="click: musicView.addClick">[Add]</a>
           <a data-bind="click: toggle.deleteStage">[X]</a>
-        </li>
+        </i>
       </ul>
-     
     </div>
+
+
     <div class="info">
       <h1 class="fav-header">My All-Time Favorites</h1>
 
@@ -62,13 +59,16 @@
           </ul>
         </div>
 
-        <div class="icons-each artistSearch" data-bind="foreach: model.artistInfo">
+        <div class="icons-each" data-bind="foreach: model.expInfo">
           <ul class="icons-ul">
-            <li class="icons-li" data-bind="itemImg">
+            <li class="icons-li" data-bind="if: itemImg">
               <img class="icons-img" data-bind="attr: {src: itemImg}">
             </li>
             <li class="icons-li">
-              <span class="icons-header" data-bind="text: artist"></span>
+              <span class="icons-header" data-bind="text: name"></span>
+            </li>
+            <li class="stage-li track-check" data-bind="if: artist">
+              <span data-bind="text: artist"></span>
             </li>
             <li class="icons-li">
                 <a class="delete" data-bind="click: toggle.delete"> [X]</a>
@@ -79,58 +79,15 @@
               <h3 data-bind="attr: {id: artist}"></h3>
             </li>
           </ul>
-
         </div>
-        <div class="icons-each albumSearch" data-bind="foreach: model.albumInfo">
-          <ul class="icons-ul">
-            <li class="icons-li" data-bind="itemImg">
-              <img class="icons-img" data-bind="attr: {src: itemImg}">
-            </li>
-            <li class="icons-li">
-              <span class="icons-header" data-bind="text: album"></span>
-            </li>
-            <li class="icons-li">
-              <a class="delete" data-bind="click: toggle.delete"> [X]</a>
-            </li>
-            <li class="thumbs">
-              <a class="up" data-bind="click: toggle.up">&#x1f44d;</a>
-              <a class="down" data-bind="click: toggle.down">&#x1f44e;</a>
-            </li>
-          </ul>
-
-        </div>
-        <div class="icons-each trackSearch" data-bind="foreach: model.trackInfo">
-          <ul class="icons-ul">
-            <li class="icons-li">
-              <span class="icons-header" data-bind="text: artist"></span>
-            </li>
-            <li class="icons-li">
-              <span class="icons-header" data-bind="text: track"></span>
-            </li>
-            <li class="icons-li">
-              <a href="#/" class="delete" data-bind="click: toggle.delete"> [X]</a>
-            </li>
-            <li class="thumbs">
-              <a class="up" data-bind="click: toggle.up">&#x1f44d;</a>
-              <a class="down" data-bind="click: toggle.down">&#x1f44e;</a>
-            </li>
-          </ul>
-        </div>
-
-
-
-
       </div>
-      <div data-bind="foreach: model.favoritesInfo">
-        <ul data-bind="attr: {id: addedId}" class="info-ul"> 
-          <li class="artist info-li" data-bind="if: artist">
-            <h2 class="artist-name" data-bind="text: artist"></h2>
+      <div data-bind="foreach: model.expInfo">
+        <ul class="info-ul"> 
+          <li class="artist info-li">
+            <h2 class="artist-name" data-bind="text: name"></h2>
           </li>
-          <li class="track info-li" data-bind="if: album">
-            <h3 class="track-name" data-bind="text: album"></h3>
-          </li>
-          <li class="album info-li" data-bind="if: track">
-            <h3 class="track-name" data-bind="text: track"></h3>
+          <li class="stage-li track-check" data-bind="if: artist">
+            <span data-bind="text: artist"></span>
           </li>
           <li class="info-li">
             <span data-bind="if: itemImg">
@@ -140,8 +97,8 @@
           <br>
           <li class="site info-li">
             <h3>
-              Check them out on <a data-bind="attr: {href: spotSite}">Spotify</a>
-              where they have <span data-bind="text: followers.total"></span> followers
+              Check them out on <a target="_blank" data-bind="attr: {href: spotSite}">Spotify</a>
+              where they have <span data-bind="if: followers"><span data-bind="text: followers.total"></span></span> followers
             </h3>
           </li>
           <li>

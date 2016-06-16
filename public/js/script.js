@@ -22,7 +22,8 @@ var model = {
   trackInfo: ko.observableArray([]),
   typeInfo: ko.observableArray([]),
   exp: ko.observableArray(),
-  expStage: ko.observableArray()
+  expStage: ko.observableArray(),
+  expInfo: ko.observableArray()
 };
 
 var viewModel = {
@@ -68,16 +69,17 @@ var musicView = {
       $.ajax({
           url: that.url,
           success: function(response) {
-            console.log(response);
+        //    console.log(response);
             model.exp.push(response);
             var exp = model.exp();
             var itemLen, typed, len, item;
             var len = model.exp().length;
             var inf = model.musicInfo();
 
+
               for(var t=0; t<len; t++){
                  typed = Object.getOwnPropertyNames(exp[t])[0];
-                 console.log(typed);
+           //      console.log(typed);
                 if(typed === 'artists'){
                   item = response.artists.items;
                 }
@@ -98,19 +100,39 @@ var musicView = {
               model.musicInfo.removeAll();
 
               for(var i=0; i<itemLen; i++){
-                
+
                 var name = item[i].name;
+                var type = item[i].type;
+                console.log(type);
+                var spotSite = item[i].external_urls.spotify;
+         
+                var followers = ko.observable(false);
                 var itemImg = ko.observable(false);
                 var artist = ko.observable(false);
-                if(item[i].images !== undefined){
-                    itemImg = item[i].images[1].url;
+
+                if(item[i].images !== undefined && item[i].images.length > 0){
+                  itemImg = item[i].images[1].url;
                 }
+
                 if(item[i].artists !== undefined){
                     artist = item[i].artists[0].name;
-                    console.log(artist);
                 }
-                  
-                 model.musicInfo.push({name: name, 'itemImg': itemImg, 'artist': artist});
+
+                if(item[i].followers !== undefined){
+                  followers = item[i].followers;
+                }
+                importantInfo = 
+                  {
+                   name: name,
+                   itemImg: itemImg,
+                   artist: artist,
+                   spotSite: spotSite,
+                   followers: followers,
+                   type: type
+                  };
+
+                 model.musicInfo.push(importantInfo);
+                 
               }
 
          
@@ -119,164 +141,23 @@ var musicView = {
             $('#loggedin').show();
           }
       });
+    },
+
+    addClick: function(clicked){
+     
+      model.expInfo.push(clicked);
+      $(".stage").hide();
+      $(".info").show();
 
     }
 };
 
-var typed;
 var toggle = {
 
   init: function(){
     $('.cutesy').slideUp(function(){
       $('.stage').slideDown();
     });
-  },
-
-  addClick: function(clicked){
- //   console.log(clicked);
-    typed = clicked.type;
-   // console.log(typed);
-    
-    function typeIt(){
-      var all = "model."+typed+"Info()";
-   //   console.log(all);
-     // return all;
-    
-      return function(){
-        var all = "model."+typed+"Info()";
-    //    console.log(all);
-      //  typeIt();
-      };
-    };
-   // console.log(typeIt());
-    // addClick: function(clicked) {
-      model.artistInfo.removeAll();
-      model.albumInfo.removeAll();
-      model.trackInfo.removeAll();
-
-      //instead of removing all, why not just add the latest?
-      //that way the add/subtract counter won't get messed up
-      //every time you add a new one
-
-      var modelTitle, clickedTitle, matchedArt, matchedAlb, matchedTrack,
-        modelType, typeId;
-      var title;
-      var infoId = document.getElementById(title + "-info");
-      var len = model.musicInfo().length;
-
-      model.favoritesInfo.push(clicked);
-
-      model.favoritesInfo().forEach(function(fav){
-        var allEl = document.getElementsByClassName('fav-li');
-        $('.fav-li').children().css("color", "white");
-
-
-        var type = fav.type;
-        var artFav = fav.artist;
-        var artClick = clicked.artist;
-        var artMatch = type === 'Artist';
-        var noArtDup = artFav !== artClick;
-        var albMatch = type === 'Album';
-        var trackMatch = type === 'Track';
-        $('icons.each').hide();
-
-        if(artMatch){
-        //  console.log(fav);
-
-          var el = document.getElementById(fav.type);
-          el.style.color = 'red';
-
-          model.artistInfo.push(fav);
-          typeId = "#"+fav.type;
-          $("artistSearch").show();
-          $(typeId).trigger('click');
-
-    //      console.log(model.artistInfo());
-      //    console.log(fav);
-
-        }
-
-        if(albMatch){
-          var el = document.getElementById(fav.type);
-          el.style.color = 'red';
-          model.albumInfo.push(fav);
-          typeId = "#"+fav.type;
-          $("albumSearch").show();
-          $(typeId).trigger('click');
-        }
-
-        if(trackMatch){
-          var el = document.getElementById(fav.type);
-          el.style.color = 'red';
-          model.trackInfo.push(fav);
-          typeId = "#"+fav.type;
-          $("trackSearch").show();
-          $(typeId).trigger('click');
-        }
-
-
-      });
-
-      for(var i=0; i<len; i++){
-
-        modelTitle = model.musicInfo()[i].title;
-        clickedTitle = clicked.title;
-        matched = modelTitle === clickedTitle;
-
-        if(matched){
-          model.musicInfo.splice(i, 1);
-        }
-      }
-
-      $(".info").show();
-
-    //  toggle.addExp();
-
-  },
-
-  addExp: function(clicked) {
-  //  console.log(model.exp());
-    var exp = model.exp();
-   // console.log(exp);
-    var len = exp.length;
-    var arr = [];
-    var stage = model.expStage();
-    stage = [];
-    for(var i=0;i<len;i++){
-
-      var typed = Object.getOwnPropertyNames(exp[i])[0];
-      arr = [];
-      if(typed === 'artists'){
-        
-        arr.push(exp[i].artists);
-      }
-      if(typed === 'albums'){
-       
-        arr.push(exp[i].albums);
-      }
-      if(typed === 'tracks'){
-   
-        arr.push(exp[i].tracks);
-      }
-    }
-  //  console.log(arr[0].items);
-    var item = arr[0].items;
-    var itemLen;
-    if(item.length>5){
-      itemLen = 5;
-    }
-    else {
-      itemLen = item.length;
-    }
-    for(var t=0; t<itemLen; t++){
-    //  model.expStage().removeAll();
-
-      console.log(item[t])
-      model.expStage.push(item[t]);
-      console.log(model.expStage());
-    }
-
-
   },
 
   deleteStage: function(clicked) {
@@ -295,7 +176,19 @@ var toggle = {
   },
 
   delete: function(clicked) {
-
+    console.log(clicked);
+    var index;
+    var expInfo = model.expInfo();
+    console.log(expInfo);
+    model.expInfo().forEach(function(info){
+      console.log(info)
+      if((clicked.name === info.name) && (clicked.type === info.type)) {
+        console.log(expInfo);
+        index = expInfo.indexOf(info);
+        model.expInfo.splice(index);
+        console.log(model.expInfo());
+      }
+    })
   },
 
   deleteIcon: function() {  
