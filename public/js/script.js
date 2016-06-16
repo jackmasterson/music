@@ -291,7 +291,7 @@ var toggle = {
           } else {
               // render initial screen
               $('#login').show();
-              $('#loggedin').hide();
+             // $('#loggedin').hide();
           }
         }
   })();
