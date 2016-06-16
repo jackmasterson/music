@@ -1,0 +1,193 @@
+* {
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+	font-family: Open Sans;
+	text-align: center;
+	vertical-align: middle;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+	display: inline;
+	margin: 20px;
+}
+
+h1 {
+	margin-top: 0;
+}
+
+a {
+	color: #aaa;
+	cursor: pointer;
+}
+
+#login, #loggedin {
+	display: none;
+}
+
+#login {
+	color: black
+}
+
+.exp {
+	color: red;
+}
+
+.delete {
+	color: red;
+	margin-bottom: 20px;
+}
+
+.main {
+	height: 70vh;
+	width: 100vw;
+	background: url(..//img/records.jpg) no-repeat;
+	background-size: cover;
+}
+
+.shade {
+	height: 70vh;
+	width: 100vw;
+	background-color: rgba(0,0,0,0.6);
+}
+
+.header {
+	padding: 10vh 7vw 0 7vw;
+	color: white;
+}
+
+.sub-header {
+	padding: 2vw 5vw 0 5vw;
+	color: white;
+	font-size: 20px;
+}
+
+.search {
+	width: 350px;
+	height: 40px;
+	margin-top: 20vh;
+}
+
+.search-button {
+	width: 300px;
+	height: 35px;
+	margin-top: 10px;
+	font-size: 20px;
+	border-radius: 5px;
+	color: white;
+	background-color: #0000ff;
+}
+
+.cutesy {
+	padding: 25px;
+}
+
+.cutesy-img-div {
+	width: 30vw;
+	float: left;
+}
+
+.cutesy-img {
+	height: 10vh;
+	width: 10vh;
+}
+
+.info {
+	display: none;
+	background-color: black;
+	color: white;
+}
+
+.info-ul {
+	border-bottom: 2px solid white;
+	padding-top: 12px;
+	margin-left: 0;
+	padding-left: 0;
+}
+
+.info-li {
+	margin: 0;
+}
+
+.artist-img {
+	height: 250px;
+	width: 325px;
+	padding-top: 20px;
+}
+
+.stage {
+	opacity: 0.4;
+	filter: alpha(opacity=40);
+	display: none;
+}
+
+.stage-ul {
+	width: 30vw;
+	display: inline-block;
+
+}
+
+.stage-li {
+	display: block;
+}
+
+.img-check {
+	height: 100px;
+	width: 175px;
+}
+
+.fav-header {
+	padding-top: 15px;
+}
+
+.icons {
+	position: absolute;
+	height: 250px;
+	overflow-y: scroll;
+	overflow-x: scroll;
+	width: 350px;
+	opacity: 0.3;
+	filter: alpha(opacity=40);
+	border: 2px solid white;
+}
+
+.icons-ul {
+	margin: 0;
+	text-align: left;
+	height: 50px;
+	margin-bottom: 80px;
+}
+
+.icons-li {
+	margin-left: 3px;
+	margin-right: 3px;
+	cursor: pointer;
+}
+
+.icons-header {
+	margin: 0;
+}
+
+.icons-img {
+	height: 50px;
+	width: 75px;
+}
+
+
+.up {
+	margin-right: 20px;
+}
+.droppable {
+
+}
+
+.highlight {
+	background-color: white;
+	height: 50px;
+}
+
+
