@@ -156,6 +156,8 @@ var musicView = {
         $(typeId).click(function(){
           $('.iconsUl').hide();
           $(typeClass).show();
+          $('.fav-a').css("color", "white");
+          $(typeId).css("color", "red")
         });
         $(typeId).trigger("click");
 
