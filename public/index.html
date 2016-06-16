@@ -24,11 +24,8 @@
         <input class="search type-val" type="text" placeholder="Is this an album, artist, or track?"></input>
         <br><button class="search-button">New Search</button>
       </div>
-
-    <div class="stage" data-bind="foreach: model.musicInfo">
-
-      <div data-bind="attr: {id: stageId}" >
-
+    
+    <div class="stage" data-bind="foreach: model.expStage">
         <h4 class="artist-check" data-bind="if: artist">
           <span data-bind="text: artist"></span>
         </h4>
@@ -47,7 +44,27 @@
         <h1>
           <a data-bind="click: toggle.deleteStage">[X]</a>
         </h1>
-      </div>
+    </div>
+
+
+    <div class="stage" data-bind="foreach: model.musicInfo">
+
+      
+      <ul class="stage-ul">
+        <li class="stage-li track-check">
+          <span data-bind="text: name"></span>
+        </li>
+        <li class="stage-li" data-bind="if: itemImg">
+          <img class="img-check" data-bind="attr: {src: itemImg}">
+        </li>
+        <li class="stage-li">
+          <a data-bind="click: toggle.addClick">Is this it? Click to add!</a>
+        </i>
+        <li class="stage-li">
+          <a data-bind="click: toggle.deleteStage">[X]</a>
+        </li>
+      </ul>
+     
     </div>
     <div class="info">
       <h1 class="fav-header">My All-Time Favorites</h1>

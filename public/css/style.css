@@ -124,6 +124,16 @@ a {
 	filter: alpha(opacity=40);
 }
 
+.stage-ul {
+	width: 30vw;
+	display: inline-block;
+
+}
+
+.stage-li {
+	display: block;
+}
+
 .img-check {
 	height: 100px;
 	width: 175px;

@@ -20,7 +20,9 @@ var model = {
   artistInfo: ko.observableArray([]),
   albumInfo: ko.observableArray([]),
   trackInfo: ko.observableArray([]),
-  typeInfo: ko.observableArray([])
+  typeInfo: ko.observableArray([]),
+  exp: ko.observableArray(),
+  expStage: ko.observableArray()
 };
 
 var viewModel = {
@@ -28,7 +30,6 @@ var viewModel = {
 	init: function(){
 	//	musicView.init();
    // dragIt.init();
-
 	}
 };
  
@@ -61,21 +62,80 @@ var musicView = {
     render: function() {
       var that = this;
       var artist, itemImg, spotSite, followers, genres, item,
-        album, track;
+        album, track, type;
 
      // console.log(model.typeInfo());
       $.ajax({
           url: that.url,
           success: function(response) {
-         //   console.log(response);
+     //       console.log(response);
 
-            var artistVal = that.typeVal === 'artist';
-            var trackVal = that.typeVal === 'track';
-            var albumVal = that.typeVal === 'album';
-
-            if(artistVal) {
-              item = response.artists.items[0];
+        /*          item = response.artists.items[0];
+                  type = item.type;
                   artist = item.name;
+                  itemImg = item.images[1].url;
+                  spotSite = item.external_urls.spotify;
+                  followers = item.followers;
+                  genres = item.genres;*/
+
+          //  model.exp.push(response);
+       //     console.log(model.exp());
+           //   model.musicInfo.push(response);
+         //   model.musicInfo.removeAll();
+           /* var artistVal = that.typeVal === 'artist';
+            var trackVal = that.typeVal === 'track';
+            var albumVal = that.typeVal === 'album';*/
+            model.exp.push(response);
+            var exp = model.exp();
+          //  if(artistVal) {
+              var item;
+              var itemLen, typed, len;
+                var len = model.exp().length;
+                var inf = model.musicInfo();
+         //     console.log(len);
+           //   console.log(response);
+
+              for(var t=0; t<len; t++){
+             //   console.log(response[t]);
+                 typed = Object.getOwnPropertyNames(exp[t])[0];
+                 console.log(typed);
+                if(typed === 'artists'){
+              //    console.log(inf, 'artist');
+                  item = response.artists.items;
+                }
+                if(typed === 'tracks'){
+                  item = response.tracks.items;
+                }
+                if(typed === 'albums'){
+                  item = response.albums.items;
+                }
+              }
+              model.exp.removeAll();
+          //    console.log(item);
+          //    console.log(inf.length);
+       //   console.log(model.musicInfo());
+
+              if(item.length>5){
+                itemLen = 5;
+              }
+              else {
+                itemLen = item.length;
+              }
+              model.musicInfo.removeAll();
+
+              for(var i=0; i<itemLen; i++){
+                
+                var name = item[i].name;
+               // console.log(item[i].images[1]);
+               var itemImg = ko.observable(false);
+               if(item[i].images !== undefined){
+                  itemImg = item[i].images[1].url;
+               }
+                
+                model.musicInfo.push({name: name, 'itemImg': itemImg});
+              }
+
+         /*         artist = item.name;
                   itemImg = item.images[1].url;
                   spotSite = item.external_urls.spotify;
                   followers = item.followers;
@@ -94,8 +154,9 @@ var musicView = {
                 'infoId': artist+'-info',
                 'stageId': artist+'-stage'
               });
-            }
-
+          //  }
+          */
+/*
             if(trackVal) {
               item = response.tracks.items[0];
                 artist = item.artists[0].name;
@@ -138,6 +199,7 @@ var musicView = {
                   'stageId': album+'-stage'
                 });
             }
+            */
 
       //      console.log(model.musicInfo()[0]);
             $('icons-each').hide();
@@ -149,9 +211,27 @@ var musicView = {
     }
 };
 
+var typed;
 var toggle = {
 
-  addClick: function(clicked) {
+  addClick: function(clicked){
+ //   console.log(clicked);
+    typed = clicked.type;
+   // console.log(typed);
+    
+    function typeIt(){
+      var all = "model."+typed+"Info()";
+   //   console.log(all);
+     // return all;
+    
+      return function(){
+        var all = "model."+typed+"Info()";
+    //    console.log(all);
+      //  typeIt();
+      };
+    };
+   // console.log(typeIt());
+    // addClick: function(clicked) {
       model.artistInfo.removeAll();
       model.albumInfo.removeAll();
       model.trackInfo.removeAll();
@@ -193,8 +273,8 @@ var toggle = {
           $("artistSearch").show();
           $(typeId).trigger('click');
 
-          console.log(model.artistInfo());
-          console.log(fav);
+    //      console.log(model.artistInfo());
+      //    console.log(fav);
 
         }
 
@@ -231,6 +311,54 @@ var toggle = {
       }
 
       $(".info").show();
+
+    //  toggle.addExp();
+
+  },
+
+  addExp: function(clicked) {
+  //  console.log(model.exp());
+    var exp = model.exp();
+   // console.log(exp);
+    var len = exp.length;
+    var arr = [];
+    var stage = model.expStage();
+    stage = [];
+    for(var i=0;i<len;i++){
+
+      var typed = Object.getOwnPropertyNames(exp[i])[0];
+      arr = [];
+      if(typed === 'artists'){
+        
+        arr.push(exp[i].artists);
+      }
+      if(typed === 'albums'){
+       
+        arr.push(exp[i].albums);
+      }
+      if(typed === 'tracks'){
+   
+        arr.push(exp[i].tracks);
+      }
+    }
+  //  console.log(arr[0].items);
+    var item = arr[0].items;
+    var itemLen;
+    if(item.length>5){
+      itemLen = 5;
+    }
+    else {
+      itemLen = item.length;
+    }
+    for(var t=0; t<itemLen; t++){
+    //  model.expStage().removeAll();
+
+      console.log(item[t])
+      model.expStage.push(item[t]);
+      console.log(model.expStage());
+    }
+
+
   },
 
   deleteStage: function(clicked) {
@@ -257,70 +385,28 @@ var toggle = {
   },
 
   navShow: function(clicked) {
-  //  console.log(clicked);
     var clickedId = clicked.clickId;
- //   console.log(clickedId);
     var clickedEl = document.getElementsByClassName(clickedId);
-  //  console.log(clickedEl);
     var title = document.getElementsByClassName(this.title);
-  //  console.log(model.musicInfo());
-   // var titleId = "#"+title;
     $('.icons-each').hide();
     $(clickedEl).show();
-   // $(titleId).show();
-  //  console.log(model.favoritesInfo());
-
-    model.favoritesInfo().forEach(function(click){
- //     console.log(click);
-    })
 
   },
 
   up: function(clicked) {
    var el = document.getElementById(clicked.artist);
-   var counter = ko.observable(++x);
-   $(el)[0].innerHTML = x;
+   $(el)[0].innerHTML = ++x;
 
   },
 
   down: function(clicked) {
     var el = document.getElementById(clicked.artist);
-    var counter = ko.observable(--x);
-    $(el)[0].innerHTML = x;
-  },
-
-  drag: function(clicked) {
-     //   console.log(this);
-        var infoId = document.getElementById((this.artist) + "-info");
-        var ID = "#"+infoId
-
-        $( infoId ).draggable({
-          axis: "y",
-          containment: ".icons-div",
-          opacity: "0.3",
-          revert: "invalid",
-          scope: "favorites",
-          scroll: "true",
-          snap: "true"
-        });
-        $( ".will-drop" ).droppable({
-          accept: infoId,
-          addClasses: "droppable",
-          hoverClass: "highlight",
-          scope: "favorites"
-        });
-  //  dragIt.init();
-
+    $(el)[0].innerHTML = --x;
   }
 };
 
-var dragIt = {
-  
-  init: function() {
-    console.log(this);
 
-  }
-};
+
 
 	(function() {
         /**
