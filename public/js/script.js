@@ -198,41 +198,51 @@ var toggle = {
     var clickedEl = document.getElementsByClassName(clickedId);
     var title = document.getElementsByClassName(this.title);
 
-  },
+  }
+};
 
-  up: function(clicked) {
- //   console.log(clicked);
-  // var el = document.getElementById(clicked.artist);
-   //$(el)[0].innerHTML = ++x;
+var count = {
 
-    var clickedId, children, ade;
-  //  console.log(clickedId);
-    var classed = document.getElementsByClassName('thumbs');
-   // console.log($(clickedId).children(classed));
+  up: function(clicked){
+    console.log(this);
+    var clickedId, children, counter;
+
       clickedId = document.getElementById(clicked.name);
-      console.log(clickedId);
       children = $(clickedId).children();
-      console.log(children);
-      ade = $(children).children('h3');
-      console.log(ade);
-     // console.log(ade);
-      console.log(ade[0]);
-      console.log(ade[0].innerHTML);
-
-   // function add() {
-   // ade[0].innerHTML = ++x; 
-     //   console.log(++x);
-      //  ++x;
+      counter = $(children).children('h3');
+      var up = document.getElementsByClassName('up')[0];
+          console.log(clicked);
+    console.log(up);
       function filter(){
-          x = ade[0].innerHTML;
+          x = counter[0].innerHTML;
           return ++x;
           
        
      };
-   //  filter();
-     ade[0].innerHTML = filter();
+     counter[0].innerHTML = filter();
+  },
 
-   },
+  down: function(clicked){
+        console.log(this);
+        var clickedId, children, counter;
+
+      clickedId = document.getElementById(clicked.name);
+      children = $(clickedId).children();
+      counter = $(children).children('h3');
+      var up = document.getElementsByClassName('up')[0];
+          console.log(clicked);
+        console.log(up);
+      function filter(){
+          x = counter[0].innerHTML;
+          return --x;
+          
+       
+     };
+     counter[0].innerHTML = filter();
+
+  }
+};
+
     
        
 
@@ -255,11 +265,7 @@ var toggle = {
 
 
 
-  down: function(clicked) {
-    var el = document.getElementById(clicked.artist);
-    $(el)[0].innerHTML = --x;
-  }
-};
+ 
 
 
 
