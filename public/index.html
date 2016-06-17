@@ -49,10 +49,17 @@
 
 
     <div class="info">
-      <h1 class="fav-header">My All-Time Favorites</h1>
-
+      <h1 class="fav-header">My All-Time Favorites</h1>      
+      <div class="auto-div">
+        <input type="text" placeholder="Search Your Favorites" class="auto-search"></input>
+      </div>
+      <div class="icons-ranked">
+        <h3 data-bind="click: slide.out">&#x1f3c6;</h3>
+        <h4 data-bind="click: slide.out">List View</h4>
+      </div>
       <div class="icons">
         <h4 class="icons-header">Ranked</h4>
+        <h4 class="corner icons-header" data-bind="click: slide.in">[x]</h4>
         <div class="fav-nav">
           <ul class="fav-ul" data-bind="foreach: model.typeInfo">
             <li class="fav-li">
@@ -82,9 +89,6 @@
             </li>
           </ul>
         </div>
-      </div>
-      <div class="auto-div">
-        <input type="text" placeholder="Search Your Favorites" class="auto-search"></input>
       </div>
       <div data-bind="foreach: model.expInfo">
         <ul class="info-ul"> 

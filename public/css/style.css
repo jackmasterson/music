@@ -145,14 +145,25 @@ a {
 }
 
 .icons {
-	position: absolute;
-	height: 250px;
 	overflow-y: scroll;
-	overflow-x: scroll;
-	width: 350px;
-	opacity: 0.3;
-	filter: alpha(opacity=40);
+	height: 60vh;
+	width: 30vw;
+	bottom: 20vh;
+	left: 100vw;
+	position: fixed;
+	z-index: 5;
 	border: 2px solid white;
+	background-color: #ccc;
+	float: left;
+	color: black;
+	opacity: 0;
+}
+
+.icons-ranked {
+	position: absolute;
+	right: 90vw;
+	top: 20vh;
+	cursor: pointer;
 }
 
 .icons-ul {
@@ -170,6 +181,7 @@ a {
 
 .icons-header {
 	margin: 0;
+	padding-top: 15px;
 }
 
 .icons-img {
@@ -177,18 +189,10 @@ a {
 	width: 75px;
 }
 
-
 .up {
 	margin-right: 20px;
 }
-.droppable {
 
-}
-
-.highlight {
-	background-color: white;
-	height: 50px;
-}
 /*----------------jquery ui-autocomplete------------*/
 .auto-search {
 	height: 35px;

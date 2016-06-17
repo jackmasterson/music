@@ -275,7 +275,22 @@ var search = {
 };
 
 
+var slide = {
 
+  out: function() {
+    $(".icons").animate({
+      opacity: 1,
+      left: "-10"
+    });
+  },
+
+  in: function() {
+    $(".icons").animate({
+      opacity: 0,
+      left: "10"
+    });
+  }
+};
  
 
 
