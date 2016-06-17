@@ -291,6 +291,23 @@ var slide = {
     });
   }
 };
+
+var enlarge = {
+  
+  in: function(clicked) {
+    
+    var clickId = "."+clicked.spotSite;
+  
+    $(".jumboUl").hide();
+    $(clickId).show();
+    $(".jumbo").slideDown();
+  },
+
+  out: function(clicked){
+    $(".jumbo").slideUp();
+  }
+
+};
  
 
 
