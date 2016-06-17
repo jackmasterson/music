@@ -296,10 +296,26 @@ var enlarge = {
   
   in: function(clicked) {
     
-    var clickName = "."+clicked.name;
+
+    var clickId = "."+clicked.name;
+    console.log([clicked.name]);
+    var clickArr = [clicked.name];
+    console.log(JSON.stringify(clickArr));
+
+    var str = clicked.name;
+    console.log(str);
+    var res = str.split(' ');
+   // var resClass = "."+res;
+   // var res = str.replace("' '", ".");
+    console.log(res);
+    var resClass = "."+res[0];
+
+
+    //var string = clickId.stringify();
+    //console.log(string);
   
     $(".jumboUl").hide();
-    $(clickName).show();
+    $(resClass).show();
     $(".jumbo").slideDown();
   },
 
