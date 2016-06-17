@@ -26,6 +26,7 @@ var viewModel = {
 	init: function(){
 	//	musicView.init();
    // dragIt.init();
+   search.init();
 	}
 };
  
@@ -243,25 +244,35 @@ var count = {
   }
 };
 
-    
-       
+var search = {
 
+  init: function() {
+    var that = this;
 
-   
+    $(".auto-search").keyup(function(){
+      that.auto();
+    });
+  },
 
-    //};
-    //var clickedId = add();
-  //  console.log(children);
-    //console.log(clicked.)
-    /*var counter = document.getElementsByClassName('counter');
-      if($(clickedId).counter){
-        
-        console.log(counter);
-       
-        counter.innerHTML = x;
-
-        ++x;
-    };*/
+  auto: function() {
+    var that = this;
+    this.source = [];
+    model.expInfo().forEach(function(each){
+      console.log(each);
+      that.source.push(each.name);
+      
+    })
+    console.log(this.source);
+    $(".auto-search").autocomplete({
+      source: that.source,
+      select: function(e, ui){
+        if(e.keyCode === 9){
+         // that.getVal();
+        }
+      }
+    });
+  }
+};
 
 
 

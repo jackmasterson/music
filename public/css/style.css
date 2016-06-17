@@ -189,5 +189,31 @@ a {
 	background-color: white;
 	height: 50px;
 }
+/*----------------jquery ui-autocomplete------------*/
+.auto-search {
+	height: 35px;
+	width: 250px;
+	color: black;
+}
 
+.auto-div {
+	position: absolute;
+	left: 70vw;
+}
+
+.ui-autocomplete {
+	width: 300px;
+	height: 25vh;
+	overflow-y: scroll;
+	left: 0;
+	text-align: left;
+}
+
+.ui-menu-item {
+	width: 100%
+}
+
+.ui-helper-hidden-accessible {
+	display: none;
+}
 
