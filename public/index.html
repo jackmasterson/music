@@ -55,7 +55,7 @@
       </div>
 
       <div class="icons">
-        <h4 class="icons-header">Ranked <span class="corner icons-header" data-bind="click: slide.in">[x]</span></h4>
+        <h4 class="icons-header">Ranked</h4>
         <h4>Click on the name to bring up more information</h4>
         <div class="fav-nav">
           <ul class="fav-ul" data-bind="foreach: model.typeInfo">
@@ -71,7 +71,7 @@
               <img class="icons-img" data-bind="attr: {src: itemImg}">
             </li>
             <li class="icons-li">
-              <h2 class="icons-header" data-bind="text: name, click: enlarge.init"></h2>
+              <h2 class="icons-header" data-bind="text: name, click: enlarge.in"></h2>
             </li>
             <li class="stage-li track-check" data-bind="if: artist">
               <span data-bind="text: artist"></span>
@@ -87,8 +87,11 @@
           </ul>
         </div>
       </div>
+
+
       <div class="jumbo" data-bind="foreach: model.expInfo">
-        <ul class="info-ul"> 
+        <span class="corner icons-header" data-bind="click: enlarge.out">[Close this Window]</span>
+        <ul data-bind="attr: {'class': name}, css: {jumboUl: name}"> 
           <li class="artist info-li">
             <h2 class="artist-name" data-bind="text: name"></h2>
           </li>
@@ -108,10 +111,11 @@
             </h3>
           </li>
           <li>
-            <a class="delete" data-bind="click: toggle.delete">[delete]</a>
+            <a class="delete" data-bind="click: toggle.delete">[Remove from Favorites]</a>
           </li>
         </ul>
       </div>
+
     </div>
     <div class="cutesy" data-bind="foreach: model.headImg">
       <div class="cutesy-img-div">

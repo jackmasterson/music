@@ -293,9 +293,20 @@ var slide = {
 };
 
 var enlarge = {
-  init: function(clicked) {
-    console.log(clicked);
+  
+  in: function(clicked) {
+    
+    var clickName = "."+clicked.name;
+  
+    $(".jumboUl").hide();
+    $(clickName).show();
+    $(".jumbo").slideDown();
+  },
+
+  out: function(clicked){
+    $(".jumbo").slideUp();
   }
+
 };
  
 

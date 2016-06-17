@@ -86,6 +86,10 @@ a {
 	padding: 25px;
 }
 
+.corner {
+	cursor: pointer;
+}
+
 .cutesy-img-div {
 	width: 30vw;
 	float: left;
@@ -103,8 +107,7 @@ a {
 }
 
 .info-ul {
-	border-bottom: 2px solid white;
-	padding-top: 12px;
+	padding-top: 22px;
 	margin-left: 0;
 	padding-left: 0;
 }
@@ -154,7 +157,15 @@ a {
 }
 
 .jumbo {
+	height: 80vh;
+	width: 80vw;
+	position: fixed;
+	z-index: 5;
 	display: none;
+	background-color: black;
+	opacity: 0.95;
+	left: 9vw;
+	bottom: 10vh;
 }
 
 .icons-ranked {
@@ -180,6 +191,7 @@ a {
 	margin: 0;
 	padding-top: 15px;
 	font-size: 20px;
+	color: gray;
 }
 
 .icons-img {
