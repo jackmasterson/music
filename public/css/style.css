@@ -149,7 +149,7 @@ a {
 	height: 60vh;
 	width: 30vw;
 	bottom: 20vh;
-	left: 100vw;
+	right: 100vw;
 	position: fixed;
 	z-index: 5;
 	border: 2px solid white;
@@ -162,7 +162,6 @@ a {
 .icons-ranked {
 	position: absolute;
 	right: 90vw;
-	top: 20vh;
 	cursor: pointer;
 }
 

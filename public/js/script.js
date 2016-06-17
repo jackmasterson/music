@@ -280,14 +280,14 @@ var slide = {
   out: function() {
     $(".icons").animate({
       opacity: 1,
-      left: "-10"
+      left: "1"
     });
   },
 
   in: function() {
     $(".icons").animate({
       opacity: 0,
-      left: "10"
+      left: "-30vw"
     });
   }
 };
