@@ -291,6 +291,12 @@ var slide = {
     });
   }
 };
+
+var enlarge = {
+  init: function(clicked) {
+    console.log(clicked);
+  }
+};
  
 
 

@@ -146,17 +146,15 @@ a {
 
 .icons {
 	overflow-y: scroll;
-	height: 60vh;
-	width: 30vw;
-	bottom: 20vh;
-	right: 100vw;
-	position: fixed;
-	z-index: 5;
-	border: 2px solid white;
+	height: 100vh;
+	width: 100vw;
 	background-color: #ccc;
 	float: left;
 	color: black;
-	opacity: 0;
+}
+
+.jumbo {
+	display: none;
 }
 
 .icons-ranked {
@@ -181,11 +179,12 @@ a {
 .icons-header {
 	margin: 0;
 	padding-top: 15px;
+	font-size: 20px;
 }
 
 .icons-img {
-	height: 50px;
-	width: 75px;
+	height: 150px;
+	width: 225px;
 }
 
 .up {
