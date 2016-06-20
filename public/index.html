@@ -90,8 +90,11 @@
 
 
       <div class="jumbo" data-bind="foreach: model.expInfo">
-        <span class="corner icons-header" data-bind="click: enlarge.out">[Close this Window]</span>
+
         <ul data-bind="attr: {'class': type+name}, css: {type: type}"> 
+          <li>
+            <span class="corner icons-header" data-bind="click: enlarge.out">[Close this Window]</span>
+          </li>
           <li class="artist info-li">
             <h2 class="artist-name" data-bind="text: name"></h2>
           </li>

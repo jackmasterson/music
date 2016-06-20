@@ -199,6 +199,7 @@ var toggle = {
       $('.info').hide();
       $('.cutesy').show();
     }
+    $('.jumbo').hide();
   },
 
   navShow: function(clicked) {
