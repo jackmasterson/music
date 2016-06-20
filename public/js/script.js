@@ -146,6 +146,7 @@ var musicView = {
       
       //console.log(clicked);
       model.expInfo.push(clicked);
+      console.log(model.expInfo());
       
       model.expInfo().forEach(function(info){
 
@@ -348,13 +349,14 @@ var enlarge = {
    // var resClass = "."+res;
    // var res = str.replace("' '", ".");
     console.log(res);
-    var resClass = "."+res[0];
-
+    console.log(res.length);
+    var resClass = "."+clicked.type+res[0];
+    console.log(resClass);
 
     //var string = clickId.stringify();
     //console.log(string);
   
-    $(".jumboUl").hide();
+    $(".type").hide();
     $(resClass).show();
     $(".jumbo").slideDown();
   },
