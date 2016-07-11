@@ -49,17 +49,14 @@
 
 
     <div class="info">
-      <h1 class="fav-header">My All-Time Favorites</h1>      
+    
       <div class="auto-div">
         <input type="text" placeholder="Search Your Favorites" class="auto-search"></input>
       </div>
-      <div class="icons-ranked">
-        <h3 data-bind="click: slide.out">&#x1f3c6;</h3>
-        <h4 data-bind="click: slide.out">List View</h4>
-      </div>
+
       <div class="icons">
         <h4 class="icons-header">Ranked</h4>
-        <h4 class="corner icons-header" data-bind="click: slide.in">[x]</h4>
+        <h4>Click on the name to bring up more information</h4>
         <div class="fav-nav">
           <ul class="fav-ul" data-bind="foreach: model.typeInfo">
             <li class="fav-li">
@@ -68,13 +65,13 @@
           </ul>
         </div>
 
-        <div class="icons-each" data-bind="foreach: model.expInfo">
+        <div class="icons-each" data-bind="foreach: count.sorting()">
           <ul class="icons-ul" data-bind="attr: {'class': type, id: name}, css: {iconsUl: type}">
             <li class="icons-li" data-bind="if: itemImg">
               <img class="icons-img" data-bind="attr: {src: itemImg}">
             </li>
             <li class="icons-li">
-              <span class="icons-header" data-bind="text: name"></span>
+              <h2 class="icons-header" data-bind="text: name, click: enlarge.in"></h2>
             </li>
             <li class="stage-li track-check" data-bind="if: artist">
               <span data-bind="text: artist"></span>
@@ -90,8 +87,14 @@
           </ul>
         </div>
       </div>
-      <div data-bind="foreach: model.expInfo">
-        <ul class="info-ul"> 
+
+
+      <div class="jumbo" data-bind="foreach: model.expInfo">
+
+        <ul data-bind="attr: {'class': type+name}, css: {type: type}"> 
+          <li>
+            <span class="corner icons-header" data-bind="click: enlarge.out">[Close this Window]</span>
+          </li>
           <li class="artist info-li">
             <h2 class="artist-name" data-bind="text: name"></h2>
           </li>
@@ -111,10 +114,11 @@
             </h3>
           </li>
           <li>
-            <a class="delete" data-bind="click: toggle.delete">[delete]</a>
+            <a class="delete" data-bind="click: toggle.delete">[Remove from Favorites]</a>
           </li>
         </ul>
       </div>
+
     </div>
     <div class="cutesy" data-bind="foreach: model.headImg">
       <div class="cutesy-img-div">
@@ -126,11 +130,11 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
 
 
-    <script src="js/lib/knockout-3.2.0.js"></script>
+        <script src="js/lib/knockout-3.2.0.js"></script>
         <script src="js/lib/jquery.js"></script>
         <script src="js/lib/jquery-ui.js"></script>
-
-    <script src="js/script.js"></script>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script src="js/script.js"></script>
   </body>
 </html>
 
