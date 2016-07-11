@@ -18,7 +18,8 @@ var model = {
   musicInfo: ko.observableArray([]),
   typeInfo: ko.observableArray([]),
   exp: ko.observableArray(),
-  expInfo: ko.observableArray()
+  expInfo: ko.observableArray(),
+  sortInfo: ko.observableArray()
 };
 
 var viewModel = {
@@ -124,7 +125,8 @@ var musicView = {
                    artist: artist,
                    spotSite: spotSite,
                    followers: followers,
-                   type: type
+                   type: type,
+                   value: ko.observable()
                   };
 
                  model.musicInfo.push(importantInfo);
@@ -140,14 +142,18 @@ var musicView = {
     },
 
     addClick: function(clicked){
+   //   console.log(clicked);
       
+      //console.log(clicked);
       model.expInfo.push(clicked);
+      console.log(model.expInfo());
       
       model.expInfo().forEach(function(info){
 
         var type = info.type;
         var typeId = "#"+type;
         var typeClass= "."+type;
+
        
         $(typeId).click(function(){
           $('.iconsUl').hide();
@@ -158,12 +164,23 @@ var musicView = {
         $(typeId).trigger("click");
 
       });
+   //   console.log(model.expInfo());
 
       $(".stage").hide();
       $(".info").show();
 
     }
 };
+
+$(document).ready(function(){
+  $.ajax({
+    url: "http://localhost:8080/",
+    success: function(data){
+//      console.log(data);
+    }
+  })
+});
+
 var x = 0;
 var toggle = {
 
@@ -187,11 +204,12 @@ var toggle = {
         model.expInfo.splice(index, 1);
       }
     })
-    console.log(model.expInfo()[0]);
+ //   console.log(model.expInfo()[0]);
     if(model.expInfo()[0] === undefined){
       $('.info').hide();
       $('.cutesy').show();
     }
+    $('.jumbo').hide();
   },
 
   navShow: function(clicked) {
@@ -205,44 +223,78 @@ var toggle = {
 var count = {
 
   up: function(clicked){
-    console.log(this);
+   // console.log(this);
     var clickedId, children, counter;
 
       clickedId = document.getElementById(clicked.name);
       children = $(clickedId).children();
       counter = $(children).children('h3');
       var up = document.getElementsByClassName('up')[0];
-          console.log(clicked);
-    console.log(up);
+
       function filter(){
           x = counter[0].innerHTML;
-          return ++x;
-          
-       
+          return ++x;      
      };
      counter[0].innerHTML = filter();
-  },
+     clicked.value(counter[0].innerHTML);
+     count.sorting();
+ },
 
   down: function(clicked){
-        console.log(this);
-        var clickedId, children, counter;
+      var clickedId, children, counter;
 
       clickedId = document.getElementById(clicked.name);
       children = $(clickedId).children();
       counter = $(children).children('h3');
       var up = document.getElementsByClassName('up')[0];
-          console.log(clicked);
-        console.log(up);
       function filter(){
           x = counter[0].innerHTML;
-          return --x;
-          
-       
+          if(x>0){
+            return --x;
+          }
+          else {
+            return x=0;
+          }
      };
      counter[0].innerHTML = filter();
+     clicked.value(counter[0].innerHTML);
+     count.sorting();
 
+  }, 
+
+  sorting: function() {
+      var aValArr = [];
+      var bValArr = [];
+      function sort(a, b){
+        aVal = a.value();
+        aValArr.push(aVal);
+        bVal = b.value();
+        bValArr.push(bVal);
+        if(aVal<bVal){
+          return -1;
+        }
+        if(aVal>bVal){
+          return 1;
+        }
+        return 1;
+      }
+  //    console.log(aValArr.length, bValArr.length);
+      if((aValArr.length>-1) && (bValArr.length>-1)){
+
+        var sorted = model.expInfo().sort(sort);
+        var reversed = sorted.reverse();
+        model.sortInfo.push(sorted);
+        return model.sortInfo()[0];
+      }
+      
+        return model.expInfo()[0];
+     
   }
 };
+
+
+
+//console.log(count.sorting());
 
 var search = {
 
@@ -291,6 +343,7 @@ var slide = {
     });
   }
 };
+<<<<<<< HEAD
 
 var enlarge = {
   
@@ -308,6 +361,43 @@ var enlarge = {
   }
 
 };
+||||||| merged common ancestors
+=======
+
+var enlarge = {
+  
+  in: function(clicked) {
+    
+
+    var clickId = "."+clicked.name;
+    console.log([clicked.name]);
+    var clickArr = [clicked.name];
+    console.log(JSON.stringify(clickArr));
+
+    var str = clicked.name;
+    console.log(str);
+    var res = str.split(' ');
+   // var resClass = "."+res;
+   // var res = str.replace("' '", ".");
+    console.log(res);
+    console.log(res.length);
+    var resClass = "."+clicked.type+res[0];
+    console.log(resClass);
+
+    //var string = clickId.stringify();
+    //console.log(string);
+  
+    $(".type").hide();
+    $(resClass).show();
+    $(".jumbo").slideDown();
+  },
+
+  out: function(clicked){
+    $(".jumbo").slideUp();
+  }
+
+};
+>>>>>>> 38960c4fd564de7f7a58c2ef055f577b73df0a3a
  
 
 
