@@ -171,6 +171,16 @@ var musicView = {
 
     }
 };
+
+$(document).ready(function(){
+  $.ajax({
+    url: "http://localhost:8080/",
+    success: function(data){
+//      console.log(data);
+    }
+  })
+});
+
 var x = 0;
 var toggle = {
 
@@ -268,7 +278,7 @@ var count = {
         }
         return 1;
       }
-      console.log(aValArr.length, bValArr.length);
+  //    console.log(aValArr.length, bValArr.length);
       if((aValArr.length>-1) && (bValArr.length>-1)){
 
         var sorted = model.expInfo().sort(sort);
