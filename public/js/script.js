@@ -97,9 +97,6 @@ var musicView = {
         musicView.use[name] = data;
         model.usableInfo.push(musicView.use);
       }
-      //console.log(model.usableInfo());
-
-
     },
 
     render: function(typed) {
@@ -116,21 +113,15 @@ var musicView = {
           musicView.use['name'] = name;
           musicView.use['type'] = type;
           musicView.use['spotSite'] = spotSite;
-          model.usableInfo.push(musicView.use);
-
           
-          musicView.moreInfo(data.images, 'images');
+
+          musicView.moreInfo(data.images, 'imaged');
           musicView.moreInfo(data.artists, 'artists');
           musicView.moreInfo(data.followers, 'followers');
         });
 
-        musicView.putItUp();
+        
      
-    },
-
-    putItUp: function() {
-      console.log('paint dat picture');
-      console.log(model.usableInfo());
     },
 
     addClick: function(clicked){

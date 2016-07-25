@@ -25,21 +25,24 @@
                    options: viewModel.selectOptions,
                    optionsText: 'name'">
         </select>   
-
-        <br><button class="search-button" data-bind="click: toggle.init">New Search</button>
+        <br>
+        <button class="search-button" data-bind="click: toggle.init">New Search</button>
       </div>
   
 
 
     <div class="stage">
       <a data-bind="click: toggle.deleteStage">[X]</a>
-      <div data-bind="foreach: model.musicInfo">
+      <div data-bind="foreach: model.usableInfo">
       <ul class="stage-ul">
         <li class="stage-li track-check">
-          <span data-bind="text: name"></span>
+          <h3 data-bind="text: name"></h3>
+        </li>
+        <li class="stage-li track-check" data-bind="if: imaged.length > 0">
+          <img class="stage-img" data-bind="attr: {src: imaged[0].url}">
         </li>
         <li class="stage-li track-check" data-bind="if: artist">
-          <span data-bind="text: artist"></span>
+          <h3 data-bind="text: artist"></h3>
         </li>
         <li class="stage-li">
           <a data-bind="click: musicView.addClick">[Add]</a>

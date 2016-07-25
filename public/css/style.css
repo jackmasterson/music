@@ -123,16 +123,27 @@ a {
 }
 
 .stage {
-	opacity: 0.4;
-	filter: alpha(opacity=40);
+
 	display: none;
+}
+
+.stage-ul:hover {
+	opacity: 1;
 }
 
 .stage-ul {
 	width: 30vw;
+	opacity: 0.4;
+	filter: alpha(opacity=40);
 	display: inline-block;
 
 }
+
+.stage-img {
+	height: 100px;
+	width: 150px;
+}
+
 
 .stage-li {
 	display: block;
