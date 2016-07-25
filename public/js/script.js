@@ -96,11 +96,15 @@ var musicView = {
     moreInfo: function(data, name){
 
       if(data){
-        musicView.use['imaged'] = ko.observable(false);
-        musicView.use['artists'] = ko.observable(false);
-        musicView.use['followers'] = ko.observable(false);
+        musicView.use['imaged'] = ko.observable();
+        musicView.use['artists'] = ko.observable();
+        musicView.use['followers'] = ko.observable();
+        musicView.use['name'] = musicView.name;
+        musicView.use['type'] = musicView.type;
+        musicView.use['spotSite'] = musicView.spotSite;
         musicView.use[name] = ko.observable(data);
         model.usableInfo.push(musicView.use);
+
       }
     },
 
@@ -111,13 +115,11 @@ var musicView = {
         var items = item.items;
 
         items.forEach(function(data){
-          var name = data.name;
-          var type = data.type;
-          var spotSite = data.external_urls.spotify;
+          musicView.name = data.name;
+          musicView.type = data.type;
+          musicView.spotSite = data.external_urls.spotify;
           musicView.use = {};
-          musicView.use['name'] = name;
-          musicView.use['type'] = type;
-          musicView.use['spotSite'] = spotSite;
+
           
 
           musicView.moreInfo(data.images, 'imaged');
@@ -129,10 +131,15 @@ var musicView = {
      
     },
 
+    highlightInit: function(){
+      //musicView.highlightClick();
+    },
+
     highlightClick: function(clicked){
 
       var spot = document.getElementsByClassName(clicked.spotSite)[0];
       model.listInfo.push(clicked);
+      console.log(clicked.imaged());
   
       $(spot).css('opacity', '1');
 
@@ -141,7 +148,9 @@ var musicView = {
     addClick: function(clicked){
 
       console.log('add!');
-      console.log(model.listInfo());
+      console.log(model.listInfo()[0].imaged());
+      $('.stage').hide();
+      $('.list').show();
 
     }
 };

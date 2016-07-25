@@ -33,21 +33,10 @@
         <div class="stage">
             <a data-bind="click: toggle.deleteStage">[Reset Search]</a>
             <a data-bind="click: musicView.addClick">[Add to Favorites]</a>
-            <div data-bind="foreach: model.usableInfo">
-                <ul data-bind="attr: {'class': spotSite}, css: {stageUl: spotSite}, click: musicView.highlightClick">
-                    <li class="stage-li track-check">
-                        <h3 data-bind="text: name"></h3>
-                    </li>
-                    <li class="stage-li track-check" data-bind="if: imaged">
-                        <span data-bind="if: imaged().length > 0">
-                          <img class="stage-img" data-bind="attr: {src: imaged()[0].url}">
-                        </span>
-                    </li>
-                    <li class="stage-li track-check" data-bind="if: artist">
-                        <h3 data-bind="text: artist"></h3>
-                    </li>
-                </ul>
-            </div>
+            <div data-bind="template: {name: 'music-template', foreach: model.usableInfo}"></div>
+        </div>
+        <div class="list">
+            <div data-bind="template: {name: 'music-template', foreach: model.listInfo}"></div>
         </div>
         <div class="cutesy" data-bind="foreach: model.headImg">
             <div class="cutesy-img-div">
@@ -56,13 +45,27 @@
             </div>
         </div>
 
-        <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
+ 
 
+
+        <script type="text/html" id="music-template">
+             <ul data-bind="attr: {'class': spotSite}, css: {stageUl: spotSite}, click: musicView.highlightClick">
+                <li class="stage-li track-check">
+                    <h3 data-bind="text: name"></h3>
+                </li>
+                <li class="stage-li track-check" data-bind="if: imaged">
+                    <span data-bind="if: imaged().length > 0">
+                      <img class="stage-img" data-bind="attr: {src: imaged()[0].url}">
+                    </span>
+                </li>
+                <li class="stage-li track-check" data-bind="if: artists.length > 0">
+                    <h3 data-bind="text: artists"></h3>
+                </li>
+            </ul>
+        </script>
 
         <script src="js/lib/knockout-3.2.0.js"></script>
         <script src="js/lib/jquery.js"></script>
-        <script src="js/lib/jquery-ui.js"></script>
-        <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="js/script.js"></script>
 </body>
 
