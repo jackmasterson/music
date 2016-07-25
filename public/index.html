@@ -27,34 +27,30 @@
                    optionsText: 'name'">
         </select>   
         <br>
-        <button class="search-button" data-bind="click: toggle.init">New Search</button>
+        <button class="search-button" data-bind="click: toggle.init">Search</button>
       </div>
-  
 
-
-    <div class="stage">
-      <a data-bind="click: toggle.deleteStage">[X]</a>
-      <div data-bind="foreach: model.usableInfo">
-      <ul class="stage-ul">
-        <li class="stage-li track-check">
-          <h3 data-bind="text: name"></h3>
-        </li>
-        <li class="stage-li track-check" data-bind="if: imaged">
-          <span data-bind="if: imaged().length > 0">
-            <img class="stage-img" data-bind="attr: {src: imaged()[0].url}">
-          </span>
-        </li>
-        <li class="stage-li track-check" data-bind="if: artist">
-          <h3 data-bind="text: artist"></h3>
-        </li>
-        <li class="stage-li">
-          <a data-bind="click: musicView.addClick">[Add]</a>
-        </i>
-      </ul>
+      <div class="stage">
+        <a data-bind="click: toggle.deleteStage">[X]</a>
+        <div data-bind="foreach: model.usableInfo">
+        <ul class="stage-ul">
+          <li class="stage-li track-check">
+            <h3 data-bind="text: name"></h3>
+          </li>
+          <li class="stage-li track-check" data-bind="if: imaged">
+            <span data-bind="if: imaged().length > 0">
+              <img class="stage-img" data-bind="attr: {src: imaged()[0].url}">
+            </span>
+          </li>
+          <li class="stage-li track-check" data-bind="if: artist">
+            <h3 data-bind="text: artist"></h3>
+          </li>
+          <li class="stage-li">
+            <a data-bind="click: musicView.addClick">[Add]</a>
+          </i>
+        </ul>
+      </div>
     </div>
-    </div>
-
-
     <div class="info">
     
       <div class="auto-div">

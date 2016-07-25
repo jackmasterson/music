@@ -99,6 +99,7 @@ var musicView = {
         musicView.use['followers'] = ko.observable(false);
         musicView.use[name] = ko.observable(data);
         model.usableInfo.push(musicView.use);
+        console.log(model.usableInfo());
       }
     },
 
