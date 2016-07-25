@@ -94,7 +94,10 @@ var musicView = {
     moreInfo: function(data, name){
 
       if(data){
-        musicView.use[name] = data;
+        musicView.use['imaged'] = ko.observable(false);
+        musicView.use['artists'] = ko.observable(false);
+        musicView.use['followers'] = ko.observable(false);
+        musicView.use[name] = ko.observable(data);
         model.usableInfo.push(musicView.use);
       }
     },

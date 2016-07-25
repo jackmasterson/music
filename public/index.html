@@ -20,7 +20,8 @@
       <div class="shade">
         <h1 class="header">Your Music. Your Way.</h1>
         <h2 class="sub-header">Search the Spotify database and rank your favorite artists, albums, and tracks</h2>
-        <input class="search item-val" type="text" placeholder="Search by Artist, Track, or Album"></input>              
+        <input class="search item-val" type="text" placeholder="Search by Artist, Track, or Album"></input> 
+        <br>             
         <select data-bind="value: viewModel.chosenOption, 
                    options: viewModel.selectOptions,
                    optionsText: 'name'">
@@ -38,8 +39,10 @@
         <li class="stage-li track-check">
           <h3 data-bind="text: name"></h3>
         </li>
-        <li class="stage-li track-check" data-bind="if: imaged.length > 0">
-          <img class="stage-img" data-bind="attr: {src: imaged[0].url}">
+        <li class="stage-li track-check" data-bind="if: imaged">
+          <span data-bind="if: imaged().length > 0">
+            <img class="stage-img" data-bind="attr: {src: imaged()[0].url}">
+          </span>
         </li>
         <li class="stage-li track-check" data-bind="if: artist">
           <h3 data-bind="text: artist"></h3>

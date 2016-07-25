@@ -25,6 +25,11 @@ a {
 	cursor: pointer;
 }
 
+select {
+	width: 250px;
+	margin: 2vh 0 0.8vh 0;
+}
+
 #login, #loggedin {
 	display: none;
 }
