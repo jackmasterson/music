@@ -21,7 +21,11 @@
         <h1 class="header">Your Music. Your Way.</h1>
         <h2 class="sub-header">Search the Spotify database and rank your favorite artists, albums, and tracks</h2>
         <input class="search item-val" type="text" placeholder="Search by Artist, Track, or Album"></input>              
-        <input class="search type-val" type="text" placeholder="Is this an album, artist, or track?"></input>
+        <select data-bind="value: viewModel.chosenOption, 
+                   options: viewModel.selectOptions,
+                   optionsText: 'name'">
+        </select>   
+
         <br><button class="search-button" data-bind="click: toggle.init">New Search</button>
       </div>
   
@@ -36,9 +40,6 @@
         </li>
         <li class="stage-li track-check" data-bind="if: artist">
           <span data-bind="text: artist"></span>
-        </li>
-        <li class="stage-li" data-bind="if: itemImg">
-          <img class="img-check" data-bind="attr: {src: itemImg}">
         </li>
         <li class="stage-li">
           <a data-bind="click: musicView.addClick">[Add]</a>
@@ -66,25 +67,7 @@
         </div>
 
         <div class="icons-each" data-bind="foreach: count.sorting()">
-          <ul class="icons-ul" data-bind="attr: {'class': type, id: name}, css: {iconsUl: type}">
-            <li class="icons-li" data-bind="if: itemImg">
-              <img class="icons-img" data-bind="attr: {src: itemImg}">
-            </li>
-            <li class="icons-li">
-              <h2 class="icons-header" data-bind="text: name, click: enlarge.in"></h2>
-            </li>
-            <li class="stage-li track-check" data-bind="if: artist">
-              <span data-bind="text: artist"></span>
-            </li>
-            <li class="icons-li">
-                <a class="delete" data-bind="click: toggle.delete"> [X]</a>
-            </li>
-            <li class="thumbs">
-              <a class="up" data-bind="click: count.up">&#x1f44d;</a>
-              <a class="down" data-bind="click: count.down">&#x1f44e;</a>
-              <h3 class="counter"></h3>
-            </li>
-          </ul>
+         
         </div>
       </div>
 
@@ -102,9 +85,6 @@
             <span data-bind="text: artist"></span>
           </li>
           <li class="info-li">
-            <span data-bind="if: itemImg">
-              <img class="artist-img" data-bind="attr: {src: itemImg}">
-            </span>
           </li>
           <br>
           <li class="site info-li">

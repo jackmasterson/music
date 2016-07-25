@@ -1,7 +1,8 @@
 
 
 var model = {
-	headImg: [
+	headImg: 
+  [
 		{
 			src:'img/search.png',
 			text: "Search"
@@ -15,139 +16,126 @@ var model = {
 			text: "Share"
 		}
 	],
-  musicInfo: ko.observableArray([]),
-  typeInfo: ko.observableArray([]),
+  musicInfo: ko.observable(),
+  usableInfo: ko.observableArray(),
+  typeInfo: 
+  [
+      {
+        'type': 'artist',
+        'clickId': 'artistSearch'
+      },
+      {
+        'type': 'album',
+        'clickId': 'albumSearch'
+      },
+      {
+        'type': 'track',
+        'clickId': 'trackSearch'
+      }
+  ],
   exp: ko.observableArray(),
   expInfo: ko.observableArray(),
   sortInfo: ko.observableArray()
 };
 
+var Option = function(name, value){
+  this.name = name;
+  this.value = value;
+}
 var viewModel = {
 
 	init: function(){
-	//	musicView.init();
-   // dragIt.init();
    search.init();
-	}
+	},
+
+  selectOptions: ko.observableArray([
+      new Option("tracks", "track"),
+      new Option("artists", "artist"),
+      new Option("albums", "album")
+  ]),
+
+  chosenOption: ko.observable()
 };
  
 var musicView = {
 
   init: function() {
     var that = this;
-    model.typeInfo.push({'type': 'artist',
-                         'clickId': 'artistSearch'},
-                        {'type': 'album',
-                         'clickId': 'albumSearch'},
-                        {'type': 'track',
-                         'clickId': 'trackSearch'});
-
-    var item = document.getElementsByClassName('item-val')[0];
-    var type = document.getElementsByClassName('type-val')[0];
-
     $('.search-button').click(function(){
-      that.itemVal = $(item).val();
-      that.typeVal = $(type).val();
+      that.typeVal = viewModel.chosenOption().value;
+      that.itemVal = viewModel.chosenOption().name;
+      that.searchVal = $('.item-val').val();
+    
       that.url = "https://api.spotify.com/v1/search?q="+
-        that.itemVal+
+        that.searchVal+
         "&type="+
         that.typeVal;
 
-      that.render();
+      that.ajax();
     });
   },
 
-    render: function() {
+  ajax: function() {
       var that = this;
       var artist, itemImg, spotSite, followers, genres, item,
         album, track, type;
 
-     // console.log(model.typeInfo());
       $.ajax({
           url: that.url,
-          success: function(response) {
-        //    console.log(response);
-            model.exp.push(response);
-            var exp = model.exp();
-            var itemLen, typed, len, item;
-            var len = model.exp().length;
-            var inf = model.musicInfo();
 
-
-              for(var t=0; t<len; t++){
-                 typed = Object.getOwnPropertyNames(exp[t])[0];
-           //      console.log(typed);
-                if(typed === 'artists'){
-                  item = response.artists.items;
-                }
-
-                if(typed === 'tracks'){
-                  item = response.tracks.items;
-                }
-
-                if(typed === 'albums'){
-                  item = response.albums.items;
-                }
-
-              }
-              model.exp.removeAll();
-              
-              itemLen = item.length;
-              
-              model.musicInfo.removeAll();
-
-              for(var i=0; i<itemLen; i++){
-
-                var name = item[i].name;
-                var type = item[i].type;
-          //      console.log(type);
-                var spotSite = item[i].external_urls.spotify;
-         
-                var followers = ko.observable(false);
-                var itemImg = ko.observable(false);
-                var artist = ko.observable(false);
-
-                if(item[i].images !== undefined && item[i].images.length > 0){
-                  itemImg = item[i].images[1].url;
-                }
-
-                if(item[i].artists !== undefined){
-                    artist = item[i].artists[0].name;
-                }
-
-                if(item[i].followers !== undefined){
-                  followers = item[i].followers;
-                }
-                importantInfo = 
-                  {
-                   name: name,
-                   itemImg: itemImg,
-                   artist: artist,
-                   spotSite: spotSite,
-                   followers: followers,
-                   type: type,
-                   value: ko.observable()
-                  };
-
-                 model.musicInfo.push(importantInfo);
-                 
-              }
-
-         
-         //   $('icons-each').hide();
-            $('#login').hide();
-            $('#loggedin').show();
+          success: function(data){
+            model.usableInfo.removeAll();
+            model.musicInfo(data);
+            musicView.render(musicView.itemVal);
           }
       });
     },
 
+    moreInfo: function(data, name){
+
+      if(data){
+        musicView.use[name] = data;
+        model.usableInfo.push(musicView.use);
+      }
+      //console.log(model.usableInfo());
+
+
+    },
+
+    render: function(typed) {
+        
+        var info = model.musicInfo();
+        var item = info[typed];
+        var items = item.items;
+
+        items.forEach(function(data){
+          var name = data.name;
+          var type = data.type;
+          var spotSite = data.external_urls.spotify;
+          musicView.use = {};
+          musicView.use['name'] = name;
+          musicView.use['type'] = type;
+          musicView.use['spotSite'] = spotSite;
+          model.usableInfo.push(musicView.use);
+
+          
+          musicView.moreInfo(data.images, 'images');
+          musicView.moreInfo(data.artists, 'artists');
+          musicView.moreInfo(data.followers, 'followers');
+        });
+
+        musicView.putItUp();
+     
+    },
+
+    putItUp: function() {
+      console.log('paint dat picture');
+      console.log(model.usableInfo());
+    },
+
     addClick: function(clicked){
-   //   console.log(clicked);
-      
-      //console.log(clicked);
-      model.expInfo.push(clicked);
-      console.log(model.expInfo());
-      
+
+      model.expInfo.push(clicked);      
       model.expInfo().forEach(function(info){
 
         var type = info.type;
@@ -172,15 +160,6 @@ var musicView = {
     }
 };
 
-$(document).ready(function(){
-  $.ajax({
-    url: "http://localhost:8080/",
-    success: function(data){
-//      console.log(data);
-    }
-  })
-});
-
 var x = 0;
 var toggle = {
 
@@ -199,12 +178,12 @@ var toggle = {
     var index;
     model.expInfo().forEach(function(info){
 
-      if(clicked === info) {
+    if(clicked === info) {
         index = model.expInfo().indexOf(info);
         model.expInfo.splice(index, 1);
       }
     })
- //   console.log(model.expInfo()[0]);
+
     if(model.expInfo()[0] === undefined){
       $('.info').hide();
       $('.cutesy').show();
@@ -343,26 +322,6 @@ var slide = {
     });
   }
 };
-<<<<<<< HEAD
-
-var enlarge = {
-  
-  in: function(clicked) {
-    
-    var clickId = "."+clicked.spotSite;
-  
-    $(".jumboUl").hide();
-    $(clickId).show();
-    $(".jumbo").slideDown();
-  },
-
-  out: function(clicked){
-    $(".jumbo").slideUp();
-  }
-
-};
-||||||| merged common ancestors
-=======
 
 var enlarge = {
   
@@ -375,18 +334,8 @@ var enlarge = {
     console.log(JSON.stringify(clickArr));
 
     var str = clicked.name;
-    console.log(str);
     var res = str.split(' ');
-   // var resClass = "."+res;
-   // var res = str.replace("' '", ".");
-    console.log(res);
-    console.log(res.length);
     var resClass = "."+clicked.type+res[0];
-    console.log(resClass);
-
-    //var string = clickId.stringify();
-    //console.log(string);
-  
     $(".type").hide();
     $(resClass).show();
     $(".jumbo").slideDown();
@@ -397,8 +346,12 @@ var enlarge = {
   }
 
 };
->>>>>>> 38960c4fd564de7f7a58c2ef055f577b73df0a3a
+
  
+
+
+
+
 
 
 
