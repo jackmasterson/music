@@ -1,4 +1,6 @@
-
+/* use a template data-bind for the staging, listing, and favorites
+areas, because they're all so similar and just use a different
+observableArray from the model*/
 
 var model = {
 	headImg: 
@@ -34,7 +36,7 @@ var model = {
       }
   ],
   exp: ko.observableArray(),
-  expInfo: ko.observableArray(),
+  listInfo: ko.observableArray(),
   sortInfo: ko.observableArray()
 };
 
@@ -99,7 +101,6 @@ var musicView = {
         musicView.use['followers'] = ko.observable(false);
         musicView.use[name] = ko.observable(data);
         model.usableInfo.push(musicView.use);
-        console.log(model.usableInfo());
       }
     },
 
@@ -128,29 +129,19 @@ var musicView = {
      
     },
 
+    highlightClick: function(clicked){
+
+      var spot = document.getElementsByClassName(clicked.spotSite)[0];
+      model.listInfo.push(clicked);
+  
+      $(spot).css('opacity', '1');
+
+    },
+
     addClick: function(clicked){
 
-      model.expInfo.push(clicked);      
-      model.expInfo().forEach(function(info){
-
-        var type = info.type;
-        var typeId = "#"+type;
-        var typeClass= "."+type;
-
-       
-        $(typeId).click(function(){
-          $('.iconsUl').hide();
-          $(typeClass).show();
-          $('.fav-a').css("color", "white");
-          $(typeId).css("color", "red")
-        });
-        $(typeId).trigger("click");
-
-      });
-   //   console.log(model.expInfo());
-
-      $(".stage").hide();
-      $(".info").show();
+      console.log('add!');
+      console.log(model.listInfo());
 
     }
 };

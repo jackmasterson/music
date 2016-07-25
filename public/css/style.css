@@ -132,15 +132,16 @@ select {
 	display: none;
 }
 
-.stage-ul:hover {
+.stageUl:hover {
 	opacity: 1;
 }
 
-.stage-ul {
+.stageUl {
 	width: 30vw;
 	opacity: 0.4;
 	filter: alpha(opacity=40);
 	display: inline-block;
+	cursor: pointer;
 
 }
 
