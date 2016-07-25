@@ -86,6 +86,7 @@ var musicView = {
           url: that.url,
 
           success: function(data){
+           // console.log(data);
             model.usableInfo.removeAll();
             model.musicInfo(data);
             musicView.render(musicView.itemVal);
@@ -93,17 +94,16 @@ var musicView = {
       });
     },
 
-    moreInfo: function(data, name){
+    moreInfo: function(data, named){
 
       if(data){
-        musicView.use['imaged'] = ko.observable();
-        musicView.use['artists'] = ko.observable();
-        musicView.use['followers'] = ko.observable();
-        musicView.use['name'] = musicView.name;
-        musicView.use['type'] = musicView.type;
-        musicView.use['spotSite'] = musicView.spotSite;
-        musicView.use[name] = ko.observable(data);
+   //     console.log(musicView.use[named]);
+        musicView.use['imaged'] = ko.observable(false);
+        musicView.use['artists'] = ko.observable(false);
+        musicView.use['followers'] = ko.observable(false);
+        musicView.use[named] = ko.observable(data);
         model.usableInfo.push(musicView.use);
+     //   console.log(model.usableInfo());
 
       }
     },
@@ -115,31 +115,29 @@ var musicView = {
         var items = item.items;
 
         items.forEach(function(data){
-          musicView.name = data.name;
-          musicView.type = data.type;
-          musicView.spotSite = data.external_urls.spotify;
+          console.log(data);
+          var name = data.name;
+          var type = data.type;
+          var spotSite = data.external_urls.spotify;
           musicView.use = {};
-
+          musicView.use['name'] = name;
+          musicView.use['type'] = type;
+          musicView.use['spotSite'] = spotSite;
           
-
-          musicView.moreInfo(data.images, 'imaged');
           musicView.moreInfo(data.artists, 'artists');
-          musicView.moreInfo(data.followers, 'followers');
+          musicView.moreInfo(data.images, 'imaged');
+          
+       //   musicView.moreInfo(data.followers, 'followers');
         });
 
         
      
     },
 
-    highlightInit: function(){
-      //musicView.highlightClick();
-    },
-
     highlightClick: function(clicked){
 
       var spot = document.getElementsByClassName(clicked.spotSite)[0];
       model.listInfo.push(clicked);
-      console.log(clicked.imaged());
   
       $(spot).css('opacity', '1');
 
@@ -147,8 +145,8 @@ var musicView = {
 
     addClick: function(clicked){
 
-      console.log('add!');
-      console.log(model.listInfo()[0].imaged());
+   //   console.log('add!');
+   //   console.log(model.listInfo()[0].imaged());
       $('.stage').hide();
       $('.list').show();
 
@@ -284,7 +282,7 @@ var search = {
     var that = this;
     this.source = [];
     model.expInfo().forEach(function(each){
-      console.log(each);
+    //  console.log(each);
       that.source.push(each.name);
       
     })
@@ -324,9 +322,9 @@ var enlarge = {
     
 
     var clickId = "."+clicked.name;
-    console.log([clicked.name]);
+   // console.log([clicked.name]);
     var clickArr = [clicked.name];
-    console.log(JSON.stringify(clickArr));
+ //   console.log(JSON.stringify(clickArr));
 
     var str = clicked.name;
     var res = str.split(' ');
