@@ -35,8 +35,20 @@ var model = {
         'clickId': 'trackSearch'
       }
   ],
+  smallNav: [
+    {
+      text: 'artist'
+    },    
+    {
+      text: 'track'
+    },    
+    {
+      text: 'album'
+    }
+  ],
   exp: ko.observableArray(),
   listInfo: ko.observableArray(),
+  listUseInfo: ko.observableArray(),
   sortInfo: ko.observableArray()
 };
 
@@ -136,7 +148,7 @@ var musicView = {
 
       musicView.spot = document.getElementById(clicked.spotSite);
       var par = $(musicView.spot).parent();
-      console.log(par);
+     // console.log(par);
       musicView.parClass = par[0].className;
       
       if(musicView.parClass === 'staged'){
@@ -144,27 +156,60 @@ var musicView = {
       }
 
       $(musicView.spot).css('opacity', '1');
-      console.log(model.usableInfo());
+   //   console.log(model.usableInfo());
 
     },
 
     addClick: function(clicked){
-
+      model.listInfo().forEach(function(each){
+        model.listUseInfo.push(each);
+      })
+     // model.listUseInfo.push(model.listInfo());
+      console.log(model.listUseInfo());
+      model.listInfo.removeAll();
       model.usableInfo.removeAll();
-      console.log(musicView.spot);
+    //  console.log(musicView.spot);
+
       
       $('.stage').hide();
       $('.list').show();
+      
+
       musicView.changeOpacity();
 
     },
 
     changeOpacity: function() {
+        
         $('.listed').children().css('opacity', '1');
+        $('.listed').children().css('display', 'inline-block');
+        $('.stageUl').hide();
+        var classed = '.'+model.listUseInfo()[0].type;
+        $(classed).show();
 
 
+    },
+
+    filterList: function(clicked) {
+
+      console.log(this);
+      var classedUl = "."+this.text;
+
+      var id = "#"+this.text;
+      $('.stageUl').hide();
+      $('.text').css('color', 'white');
+      $(id).css('color', 'red');
+    //  
+    //$('.album').show();
+      $(classedUl).show();
     }
 };
+
+
+
+
+
+
 
 var x = 0;
 var toggle = {
@@ -176,6 +221,7 @@ var toggle = {
   },
 
   deleteStage: function(clicked) {
+    console.log(model.listInfo());
     $('.stage').hide();
     $('.cutesy').show();
   },
@@ -277,10 +323,6 @@ var count = {
   }
 };
 
-
-
-//console.log(count.sorting());
-
 var search = {
 
   init: function() {
@@ -289,78 +331,10 @@ var search = {
     $(".auto-search").keyup(function(){
       that.auto();
     });
-  },
-
-  auto: function() {
-    var that = this;
-    this.source = [];
-    model.expInfo().forEach(function(each){
-    //  console.log(each);
-      that.source.push(each.name);
-      
-    })
-    console.log(this.source);
-    $(".auto-search").autocomplete({
-      source: that.source,
-      select: function(e, ui){
-        if(e.keyCode === 9){
-         // that.getVal();
-        }
-      }
-    });
   }
-};
-
-
-var slide = {
-
-  out: function() {
-    $(".icons").animate({
-      opacity: 1,
-      left: "1"
-    });
-  },
-
-  in: function() {
-    $(".icons").animate({
-      opacity: 0,
-      left: "-30vw"
-    });
-  }
-};
-
-var enlarge = {
-  
-  in: function(clicked) {
-    
-
-    var clickId = "."+clicked.name;
-   // console.log([clicked.name]);
-    var clickArr = [clicked.name];
- //   console.log(JSON.stringify(clickArr));
-
-    var str = clicked.name;
-    var res = str.split(' ');
-    var resClass = "."+clicked.type+res[0];
-    $(".type").hide();
-    $(resClass).show();
-    $(".jumbo").slideDown();
-  },
-
-  out: function(clicked){
-    $(".jumbo").slideUp();
-  }
-
 };
 
  
-
-
-
-
-
-
-
 
 	(function() {
         /**

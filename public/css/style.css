@@ -235,6 +235,19 @@ select {
 	background-color: black;
 }
 
+.item-header {
+	margin: 0;
+	padding-top: 20px;
+	padding-bottom: 15px;
+}
+
+.small-nav {
+	margin: 0;
+	padding: 0;
+	font-size: 15px;
+	cursor: pointer;
+}
+
 /*----------------jquery ui-autocomplete------------*/
 .auto-search {
 	height: 35px;

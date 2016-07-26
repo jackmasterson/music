@@ -36,7 +36,10 @@
             <div class="staged" data-bind="template: {name: 'music-template', foreach: model.usableInfo}"></div>
         </div>
         <div class="list">
-            <div class="listed" data-bind="template: {name: 'music-template', foreach: model.listInfo}"></div>
+            <ul class="small-nav" data-bind="foreach: model.smallNav">
+                <li data-bind="text: text, click: musicView.filterList, css: {text: text}, attr: {id: text}"></li>
+            </ul>
+            <div class="listed" data-bind="template: {name: 'music-template', foreach: model.listUseInfo}"></div>
         </div>
         <div class="cutesy" data-bind="foreach: model.headImg">
             <div class="cutesy-img-div">
@@ -50,16 +53,16 @@
 
         <script type="text/html" id="music-template">
              <ul data-bind="attr: {id: spotSite, 'class': type}, css: {stageUl: spotSite}, click: musicView.highlightClick">
-                <li class="stage-li track-check">
-                    <h3 data-bind="text: name"></h3>
+                <li class="item-header stage-li track-check">
+                    <h3 class="item-header" data-bind="text: name"></h3>
                 </li>
-                <li class="stage-li track-check" data-bind="if: imaged">
+                <li class="item-header stage-li track-check" data-bind="if: imaged">
                     <span data-bind="if: imaged().length > 0">
                       <img class="stage-img" data-bind="attr: {src: imaged()[0].url}">
                     </span>
                 </li>
-                <li class="stage-li track-check" data-bind="if: artists.length > 0">
-                    <h3 data-bind="text: artists"></h3>
+                <li class="item-header stage-li track-check" data-bind="if: artists.length > 0">
+                    <h3 class="item-header" data-bind="text: artists"></h3>
                 </li>
             </ul>
         </script>
