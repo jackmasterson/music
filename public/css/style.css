@@ -231,6 +231,10 @@ select {
 	display: none;
 }
 
+.listed {
+	background-color: black;
+}
+
 /*----------------jquery ui-autocomplete------------*/
 .auto-search {
 	height: 35px;

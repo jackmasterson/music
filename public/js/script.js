@@ -135,36 +135,31 @@ var musicView = {
     highlightClick: function(clicked){
 
       musicView.spot = document.getElementsByClassName(clicked.spotSite)[0];
-      
-
-    //  console.log($(spot).parent());
-      
       var par = $(musicView.spot).parent();
       musicView.parClass = par[0].className;
-      console.log(musicView.parClass);
-    //  console.log(parClass);
       
       if(musicView.parClass === 'staged'){
         model.listInfo.push(clicked);
       }
 
-        $(musicView.spot).css('opacity', '1');
-     
+      $(musicView.spot).css('opacity', '1');
+      
 
     },
 
     addClick: function(clicked){
 
- //     if(musicView.parClass === 'listed'){
-   //     $(spot).css('opacity', '1');
-     // }
-   //   console.log('add!');
-   //   console.log(model.listInfo()[0].imaged());
       model.usableInfo.removeAll();
-      $(musicView.spot).css('opacity', '1');
+      console.log(musicView.spot);
+      
       $('.stage').hide();
       $('.list').show();
-      console.log(this);
+      musicView.changeOpacity();
+
+    },
+
+    changeOpacity: function() {
+        $('.listed').children().css('opacity', '1');
 
 
     }
