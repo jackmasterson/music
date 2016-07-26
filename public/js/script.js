@@ -48,6 +48,7 @@ var viewModel = {
 
 	init: function(){
    search.init();
+  // musicView.highlightClick();
 	},
 
   selectOptions: ko.observableArray([
@@ -97,14 +98,11 @@ var musicView = {
     moreInfo: function(data, named){
 
       if(data){
-   //     console.log(musicView.use[named]);
         musicView.use['imaged'] = ko.observable(false);
         musicView.use['artists'] = ko.observable(false);
         musicView.use['followers'] = ko.observable(false);
         musicView.use[named] = ko.observable(data);
         model.usableInfo.push(musicView.use);
-     //   console.log(model.usableInfo());
-
       }
     },
 
@@ -115,7 +113,7 @@ var musicView = {
         var items = item.items;
 
         items.forEach(function(data){
-          console.log(data);
+       //   console.log(data);
           var name = data.name;
           var type = data.type;
           var spotSite = data.external_urls.spotify;
@@ -136,19 +134,38 @@ var musicView = {
 
     highlightClick: function(clicked){
 
-      var spot = document.getElementsByClassName(clicked.spotSite)[0];
-      model.listInfo.push(clicked);
-  
-      $(spot).css('opacity', '1');
+      musicView.spot = document.getElementsByClassName(clicked.spotSite)[0];
+      
+
+    //  console.log($(spot).parent());
+      
+      var par = $(musicView.spot).parent();
+      musicView.parClass = par[0].className;
+      console.log(musicView.parClass);
+    //  console.log(parClass);
+      
+      if(musicView.parClass === 'staged'){
+        model.listInfo.push(clicked);
+      }
+
+        $(musicView.spot).css('opacity', '1');
+     
 
     },
 
     addClick: function(clicked){
 
+ //     if(musicView.parClass === 'listed'){
+   //     $(spot).css('opacity', '1');
+     // }
    //   console.log('add!');
    //   console.log(model.listInfo()[0].imaged());
+      model.usableInfo.removeAll();
+      $(musicView.spot).css('opacity', '1');
       $('.stage').hide();
       $('.list').show();
+      console.log(this);
+
 
     }
 };

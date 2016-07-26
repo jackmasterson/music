@@ -33,10 +33,10 @@
         <div class="stage">
             <a data-bind="click: toggle.deleteStage">[Reset Search]</a>
             <a data-bind="click: musicView.addClick">[Add to Favorites]</a>
-            <div data-bind="template: {name: 'music-template', foreach: model.usableInfo}"></div>
+            <div class="staged" data-bind="template: {name: 'music-template', foreach: model.usableInfo}"></div>
         </div>
         <div class="list">
-            <div data-bind="template: {name: 'music-template', foreach: model.listInfo}"></div>
+            <div class="listed" data-bind="template: {name: 'music-template', foreach: model.listInfo}"></div>
         </div>
         <div class="cutesy" data-bind="foreach: model.headImg">
             <div class="cutesy-img-div">
