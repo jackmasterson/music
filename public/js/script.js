@@ -165,7 +165,7 @@ var musicView = {
         model.listUseInfo.push(each);
       })
      // model.listUseInfo.push(model.listInfo());
-      console.log(model.listUseInfo());
+ //     console.log(model.listUseInfo());
       model.listInfo.removeAll();
       model.usableInfo.removeAll();
     //  console.log(musicView.spot);
@@ -180,31 +180,34 @@ var musicView = {
     },
 
     changeOpacity: function() {
-        
+        //var thumbsUp = '';
         $('.listed').children().css('opacity', '1');
-        $('.listed').children().css('display', 'inline-block');
+        $('.listed').children().css('display', 'block');
         $('.stageUl').hide();
+       // / $('.stageUl').append(thumbsUp);
         var classed = '.'+model.listUseInfo()[0].type;
         $(classed).show();
+        $('.thumbsVote').show();
 
 
     },
 
     filterList: function(clicked) {
 
-      console.log(this);
       var classedUl = "."+this.text;
-
       var id = "#"+this.text;
+
       $('.stageUl').hide();
       $('.text').css('color', 'white');
       $(id).css('color', 'red');
-    //  
-    //$('.album').show();
+
       $(classedUl).show();
+    },
+    thumbs:function(){
+        console.log('thumbs up!');
+        console.log(this);
     }
 };
-
 
 
 
