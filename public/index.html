@@ -1,140 +1,75 @@
 <!doctype html>
 <html>
-  <head>
+
+<head>
     <title>Music API</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/jquery-ui.css">
     <link rel="stylesheet" href="css/style.css">
-  </head>
-  <body>
+</head>
+
+<body>
     <div id="login">
-      <h1>Login with 
-        <a target="_blank" href="https://www.spotify.com/us/">Spotify</a> 
-        to Continue on to our website!
-      </h1>
-      <a href="/login" class="btn btn-primary">Log in</a>
+        <h1>Login with 
+          <a target="_blank" href="https://www.spotify.com/us/">Spotify</a> to Continue on to our website!
+        </h1>
+        <a href="/login" class="btn btn-primary">Log in</a>
     </div>
     <div class="main" id="loggedin">
-      <div class="shade">
-        <h1 class="header">Your Music. Your Way.</h1>
-        <h2 class="sub-header">Search the Spotify database and rank your favorite artists, albums, and tracks</h2>
-        <input class="search item-val" type="text" placeholder="Search by Artist, Track, or Album"></input>              
-        <input class="search type-val" type="text" placeholder="Is this an album, artist, or track?"></input>
-        <br><button class="search-button" data-bind="click: toggle.init">New Search</button>
-      </div>
-  
-
-
-    <div class="stage">
-      <a data-bind="click: toggle.deleteStage">[X]</a>
-      <div data-bind="foreach: model.musicInfo">
-      <ul class="stage-ul">
-        <li class="stage-li track-check">
-          <span data-bind="text: name"></span>
-        </li>
-        <li class="stage-li track-check" data-bind="if: artist">
-          <span data-bind="text: artist"></span>
-        </li>
-        <li class="stage-li" data-bind="if: itemImg">
-          <img class="img-check" data-bind="attr: {src: itemImg}">
-        </li>
-        <li class="stage-li">
-          <a data-bind="click: musicView.addClick">[Add]</a>
-        </i>
-      </ul>
-    </div>
-    </div>
-
-
-    <div class="info">
-    
-      <div class="auto-div">
-        <input type="text" placeholder="Search Your Favorites" class="auto-search"></input>
-      </div>
-
-      <div class="icons">
-        <h4 class="icons-header">Ranked</h4>
-        <h4>Click on the name to bring up more information</h4>
-        <div class="fav-nav">
-          <ul class="fav-ul" data-bind="foreach: model.typeInfo">
-            <li class="fav-li">
-              <a class="fav-a" data-bind="click: toggle.navShow, text: type, attr: {id: type}"></a>
-            </li>
-          </ul>
+        <div class="shade">
+            <h1 class="header">Your Music. Your Way.</h1>
+            <h2 class="sub-header">Search the Spotify database and rank your favorite artists, albums, and tracks</h2>
+            <input class="search item-val" type="text" placeholder="Search by Artist, Track, or Album"></input>
+            <br>
+            <select data-bind="value: viewModel.chosenOption, 
+                   options: viewModel.selectOptions,
+                   optionsText: 'name'">
+            </select>
+            <br>
+            <button class="search-button" data-bind="click: toggle.init">Search</button>
+        </div>
+        <div class="stage">
+            <a data-bind="click: toggle.deleteStage">[Reset Search]</a>
+            <a data-bind="click: musicView.addClick">[Add to Favorites]</a>
+            <div class="staged" data-bind="template: {name: 'music-template', foreach: model.usableInfo}"></div>
+        </div>
+        <div class="list">
+            <ul class="small-nav" data-bind="foreach: model.smallNav">
+                <li data-bind="text: text, click: musicView.filterList, css: {text: text}, attr: {id: text}"></li>
+            </ul>
+            <div class="listed" data-bind="template: {name: 'music-template', foreach: model.listUseInfo}"></div>
+        </div>
+        <div class="cutesy" data-bind="foreach: model.headImg">
+            <div class="cutesy-img-div">
+                <img class="cutesy-img" data-bind="attr: { src: src }">
+                <h2 data-bind="text: text"></h2>
+            </div>
         </div>
 
-        <div class="icons-each" data-bind="foreach: count.sorting()">
-          <ul class="icons-ul" data-bind="attr: {'class': type, id: name}, css: {iconsUl: type}">
-            <li class="icons-li" data-bind="if: itemImg">
-              <img class="icons-img" data-bind="attr: {src: itemImg}">
-            </li>
-            <li class="icons-li">
-              <h2 class="icons-header" data-bind="text: name, click: enlarge.in"></h2>
-            </li>
-            <li class="stage-li track-check" data-bind="if: artist">
-              <span data-bind="text: artist"></span>
-            </li>
-            <li class="icons-li">
-                <a class="delete" data-bind="click: toggle.delete"> [X]</a>
-            </li>
-            <li class="thumbs">
-              <a class="up" data-bind="click: count.up">&#x1f44d;</a>
-              <a class="down" data-bind="click: count.down">&#x1f44e;</a>
-              <h3 class="counter"></h3>
-            </li>
-          </ul>
-        </div>
-      </div>
+ 
 
 
-      <div class="jumbo" data-bind="foreach: model.expInfo">
-
-        <ul data-bind="attr: {'class': type+name}, css: {type: type}"> 
-          <li>
-            <span class="corner icons-header" data-bind="click: enlarge.out">[Close this Window]</span>
-          </li>
-          <li class="artist info-li">
-            <h2 class="artist-name" data-bind="text: name"></h2>
-          </li>
-          <li class="stage-li track-check" data-bind="if: artist">
-            <span data-bind="text: artist"></span>
-          </li>
-          <li class="info-li">
-            <span data-bind="if: itemImg">
-              <img class="artist-img" data-bind="attr: {src: itemImg}">
-            </span>
-          </li>
-          <br>
-          <li class="site info-li">
-            <h3>
-              Check them out on <a target="_blank" data-bind="attr: {href: spotSite}">Spotify</a>
-              where they have <span data-bind="if: followers"><span data-bind="text: followers.total"></span></span> followers
-            </h3>
-          </li>
-          <li>
-            <a class="delete" data-bind="click: toggle.delete">[Remove from Favorites]</a>
-          </li>
-        </ul>
-      </div>
-
-    </div>
-    <div class="cutesy" data-bind="foreach: model.headImg">
-      <div class="cutesy-img-div">
-        <img class="cutesy-img" data-bind="attr: { src: src }">
-        <h2 data-bind="text: text"></h2>
-      </div>
-    </div>
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
-
+        <script type="text/html" id="music-template">
+             <ul data-bind="attr: {id: spotSite, 'class': type}, css: {stageUl: spotSite}, click: musicView.highlightClick">
+                <li class="item-header stage-li track-check">
+                    <h3 class="item-header" data-bind="text: name"></h3>
+                </li>
+                <li class="item-header stage-li track-check" data-bind="if: imaged">
+                    <span data-bind="if: imaged().length > 0">
+                      <img class="stage-img" data-bind="attr: {src: imaged()[0].url}">
+                    </span>
+                </li>
+                <li class="item-header stage-li track-check" data-bind="if: artists.length > 0">
+                    <h3 class="item-header" data-bind="text: artists"></h3>
+                </li>
+            </ul>
+        </script>
 
         <script src="js/lib/knockout-3.2.0.js"></script>
         <script src="js/lib/jquery.js"></script>
-        <script src="js/lib/jquery-ui.js"></script>
-        <script src="https://d3js.org/d3.v4.min.js"></script>
         <script src="js/script.js"></script>
-  </body>
-</html>
+</body>
 
+</html>

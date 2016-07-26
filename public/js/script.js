@@ -1,7 +1,10 @@
-
+/* use a template data-bind for the staging, listing, and favorites
+areas, because they're all so similar and just use a different
+observableArray from the model*/
 
 var model = {
-	headImg: [
+	headImg: 
+  [
 		{
 			src:'img/search.png',
 			text: "Search"
@@ -15,171 +18,198 @@ var model = {
 			text: "Share"
 		}
 	],
-  musicInfo: ko.observableArray([]),
-  typeInfo: ko.observableArray([]),
+  musicInfo: ko.observable(),
+  usableInfo: ko.observableArray(),
+  typeInfo: 
+  [
+      {
+        'type': 'artist',
+        'clickId': 'artistSearch'
+      },
+      {
+        'type': 'album',
+        'clickId': 'albumSearch'
+      },
+      {
+        'type': 'track',
+        'clickId': 'trackSearch'
+      }
+  ],
+  smallNav: [
+    {
+      text: 'artist'
+    },    
+    {
+      text: 'track'
+    },    
+    {
+      text: 'album'
+    }
+  ],
   exp: ko.observableArray(),
-  expInfo: ko.observableArray(),
+  listInfo: ko.observableArray(),
+  listUseInfo: ko.observableArray(),
   sortInfo: ko.observableArray()
 };
 
+var Option = function(name, value){
+  this.name = name;
+  this.value = value;
+}
 var viewModel = {
 
 	init: function(){
-	//	musicView.init();
-   // dragIt.init();
    search.init();
-	}
+  // musicView.highlightClick();
+	},
+
+  selectOptions: ko.observableArray([
+      new Option("tracks", "track"),
+      new Option("artists", "artist"),
+      new Option("albums", "album")
+  ]),
+
+  chosenOption: ko.observable()
 };
  
 var musicView = {
 
   init: function() {
     var that = this;
-    model.typeInfo.push({'type': 'artist',
-                         'clickId': 'artistSearch'},
-                        {'type': 'album',
-                         'clickId': 'albumSearch'},
-                        {'type': 'track',
-                         'clickId': 'trackSearch'});
-
-    var item = document.getElementsByClassName('item-val')[0];
-    var type = document.getElementsByClassName('type-val')[0];
-
     $('.search-button').click(function(){
-      that.itemVal = $(item).val();
-      that.typeVal = $(type).val();
+      that.typeVal = viewModel.chosenOption().value;
+      that.itemVal = viewModel.chosenOption().name;
+      that.searchVal = $('.item-val').val();
+    
       that.url = "https://api.spotify.com/v1/search?q="+
-        that.itemVal+
+        that.searchVal+
         "&type="+
         that.typeVal;
 
-      that.render();
+      that.ajax();
     });
   },
 
-    render: function() {
+  ajax: function() {
       var that = this;
       var artist, itemImg, spotSite, followers, genres, item,
         album, track, type;
 
-     // console.log(model.typeInfo());
       $.ajax({
           url: that.url,
-          success: function(response) {
-        //    console.log(response);
-            model.exp.push(response);
-            var exp = model.exp();
-            var itemLen, typed, len, item;
-            var len = model.exp().length;
-            var inf = model.musicInfo();
 
-
-              for(var t=0; t<len; t++){
-                 typed = Object.getOwnPropertyNames(exp[t])[0];
-           //      console.log(typed);
-                if(typed === 'artists'){
-                  item = response.artists.items;
-                }
-
-                if(typed === 'tracks'){
-                  item = response.tracks.items;
-                }
-
-                if(typed === 'albums'){
-                  item = response.albums.items;
-                }
-
-              }
-              model.exp.removeAll();
-              
-              itemLen = item.length;
-              
-              model.musicInfo.removeAll();
-
-              for(var i=0; i<itemLen; i++){
-
-                var name = item[i].name;
-                var type = item[i].type;
-          //      console.log(type);
-                var spotSite = item[i].external_urls.spotify;
-         
-                var followers = ko.observable(false);
-                var itemImg = ko.observable(false);
-                var artist = ko.observable(false);
-
-                if(item[i].images !== undefined && item[i].images.length > 0){
-                  itemImg = item[i].images[1].url;
-                }
-
-                if(item[i].artists !== undefined){
-                    artist = item[i].artists[0].name;
-                }
-
-                if(item[i].followers !== undefined){
-                  followers = item[i].followers;
-                }
-                importantInfo = 
-                  {
-                   name: name,
-                   itemImg: itemImg,
-                   artist: artist,
-                   spotSite: spotSite,
-                   followers: followers,
-                   type: type,
-                   value: ko.observable()
-                  };
-
-                 model.musicInfo.push(importantInfo);
-                 
-              }
-
-         
-         //   $('icons-each').hide();
-            $('#login').hide();
-            $('#loggedin').show();
+          success: function(data){
+           // console.log(data);
+            model.usableInfo.removeAll();
+            model.musicInfo(data);
+            musicView.render(musicView.itemVal);
           }
       });
     },
 
-    addClick: function(clicked){
-   //   console.log(clicked);
-      
-      //console.log(clicked);
-      model.expInfo.push(clicked);
-      console.log(model.expInfo());
-      
-      model.expInfo().forEach(function(info){
+    moreInfo: function(data, named){
 
-        var type = info.type;
-        var typeId = "#"+type;
-        var typeClass= "."+type;
+      if(data){
+        musicView.use['imaged'] = ko.observable(false);
+        musicView.use['artists'] = ko.observable(false);
+        musicView.use['followers'] = ko.observable(false);
+        musicView.use[named] = ko.observable(data);
+        model.usableInfo.push(musicView.use);
+      }
+    },
 
-       
-        $(typeId).click(function(){
-          $('.iconsUl').hide();
-          $(typeClass).show();
-          $('.fav-a').css("color", "white");
-          $(typeId).css("color", "red")
+    render: function(typed) {
+        
+        var info = model.musicInfo();
+        var item = info[typed];
+        var items = item.items;
+
+        items.forEach(function(data){
+       //   console.log(data);
+          var name = data.name;
+          var type = data.type;
+          var spotSite = data.external_urls.spotify;
+          musicView.use = {};
+          musicView.use['name'] = name;
+          musicView.use['type'] = type;
+          musicView.use['spotSite'] = spotSite;
+          
+          musicView.moreInfo(data.artists, 'artists');
+          musicView.moreInfo(data.images, 'imaged');
+          
+       //   musicView.moreInfo(data.followers, 'followers');
         });
-        $(typeId).trigger("click");
 
-      });
-   //   console.log(model.expInfo());
+        
+     
+    },
 
-      $(".stage").hide();
-      $(".info").show();
+    highlightClick: function(clicked){
 
+      musicView.spot = document.getElementById(clicked.spotSite);
+      var par = $(musicView.spot).parent();
+     // console.log(par);
+      musicView.parClass = par[0].className;
+      
+      if(musicView.parClass === 'staged'){
+        model.listInfo.push(clicked);
+      }
+
+      $(musicView.spot).css('opacity', '1');
+   //   console.log(model.usableInfo());
+
+    },
+
+    addClick: function(clicked){
+      model.listInfo().forEach(function(each){
+        model.listUseInfo.push(each);
+      })
+     // model.listUseInfo.push(model.listInfo());
+      console.log(model.listUseInfo());
+      model.listInfo.removeAll();
+      model.usableInfo.removeAll();
+    //  console.log(musicView.spot);
+
+      
+      $('.stage').hide();
+      $('.list').show();
+      
+
+      musicView.changeOpacity();
+
+    },
+
+    changeOpacity: function() {
+        
+        $('.listed').children().css('opacity', '1');
+        $('.listed').children().css('display', 'inline-block');
+        $('.stageUl').hide();
+        var classed = '.'+model.listUseInfo()[0].type;
+        $(classed).show();
+
+
+    },
+
+    filterList: function(clicked) {
+
+      console.log(this);
+      var classedUl = "."+this.text;
+
+      var id = "#"+this.text;
+      $('.stageUl').hide();
+      $('.text').css('color', 'white');
+      $(id).css('color', 'red');
+    //  
+    //$('.album').show();
+      $(classedUl).show();
     }
 };
 
-$(document).ready(function(){
-  $.ajax({
-    url: "http://localhost:8080/",
-    success: function(data){
-//      console.log(data);
-    }
-  })
-});
+
+
+
+
+
 
 var x = 0;
 var toggle = {
@@ -191,6 +221,7 @@ var toggle = {
   },
 
   deleteStage: function(clicked) {
+    console.log(model.listInfo());
     $('.stage').hide();
     $('.cutesy').show();
   },
@@ -199,12 +230,12 @@ var toggle = {
     var index;
     model.expInfo().forEach(function(info){
 
-      if(clicked === info) {
+    if(clicked === info) {
         index = model.expInfo().indexOf(info);
         model.expInfo.splice(index, 1);
       }
     })
- //   console.log(model.expInfo()[0]);
+
     if(model.expInfo()[0] === undefined){
       $('.info').hide();
       $('.cutesy').show();
@@ -292,10 +323,6 @@ var count = {
   }
 };
 
-
-
-//console.log(count.sorting());
-
 var search = {
 
   init: function() {
@@ -304,104 +331,10 @@ var search = {
     $(".auto-search").keyup(function(){
       that.auto();
     });
-  },
-
-  auto: function() {
-    var that = this;
-    this.source = [];
-    model.expInfo().forEach(function(each){
-      console.log(each);
-      that.source.push(each.name);
-      
-    })
-    console.log(this.source);
-    $(".auto-search").autocomplete({
-      source: that.source,
-      select: function(e, ui){
-        if(e.keyCode === 9){
-         // that.getVal();
-        }
-      }
-    });
   }
 };
 
-
-var slide = {
-
-  out: function() {
-    $(".icons").animate({
-      opacity: 1,
-      left: "1"
-    });
-  },
-
-  in: function() {
-    $(".icons").animate({
-      opacity: 0,
-      left: "-30vw"
-    });
-  }
-};
-<<<<<<< HEAD
-
-var enlarge = {
-  
-  in: function(clicked) {
-    
-    var clickId = "."+clicked.spotSite;
-  
-    $(".jumboUl").hide();
-    $(clickId).show();
-    $(".jumbo").slideDown();
-  },
-
-  out: function(clicked){
-    $(".jumbo").slideUp();
-  }
-
-};
-||||||| merged common ancestors
-=======
-
-var enlarge = {
-  
-  in: function(clicked) {
-    
-
-    var clickId = "."+clicked.name;
-    console.log([clicked.name]);
-    var clickArr = [clicked.name];
-    console.log(JSON.stringify(clickArr));
-
-    var str = clicked.name;
-    console.log(str);
-    var res = str.split(' ');
-   // var resClass = "."+res;
-   // var res = str.replace("' '", ".");
-    console.log(res);
-    console.log(res.length);
-    var resClass = "."+clicked.type+res[0];
-    console.log(resClass);
-
-    //var string = clickId.stringify();
-    //console.log(string);
-  
-    $(".type").hide();
-    $(resClass).show();
-    $(".jumbo").slideDown();
-  },
-
-  out: function(clicked){
-    $(".jumbo").slideUp();
-  }
-
-};
->>>>>>> 38960c4fd564de7f7a58c2ef055f577b73df0a3a
  
-
-
-
 
 	(function() {
         /**
