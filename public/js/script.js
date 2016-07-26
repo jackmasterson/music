@@ -134,8 +134,9 @@ var musicView = {
 
     highlightClick: function(clicked){
 
-      musicView.spot = document.getElementsByClassName(clicked.spotSite)[0];
+      musicView.spot = document.getElementById(clicked.spotSite);
       var par = $(musicView.spot).parent();
+      console.log(par);
       musicView.parClass = par[0].className;
       
       if(musicView.parClass === 'staged'){
@@ -143,7 +144,7 @@ var musicView = {
       }
 
       $(musicView.spot).css('opacity', '1');
-      
+      console.log(model.usableInfo());
 
     },
 

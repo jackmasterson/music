@@ -49,7 +49,7 @@
 
 
         <script type="text/html" id="music-template">
-             <ul data-bind="attr: {'class': spotSite}, css: {stageUl: spotSite}, click: musicView.highlightClick">
+             <ul data-bind="attr: {id: spotSite, 'class': type}, css: {stageUl: spotSite}, click: musicView.highlightClick">
                 <li class="stage-li track-check">
                     <h3 data-bind="text: name"></h3>
                 </li>
